@@ -1,0 +1,1169 @@
+/* Plugin css */
+@font-face {
+    font-family: 'HelveticaNeue-Roman';
+    src: url('../font/HelveticaLTStdRoman.woff');
+    font-weight: 400
+}
+
+@font-face {
+    font-family: 'HelveticaNeue-dmd';
+    src: url('../font/HelveticaNeueLTStdMd.woff');
+    font-weight: 500
+}
+
+@font-face {
+    font-family: 'HelveticaNeue-bold';
+    src: url('../font/HelveticaNeueLTStdBd.woff');
+    font-weight: 500
+}
+
+@font-face {
+    font-family: 'HelveticaNeue-md';
+    src: url('../font/HelveticaNeueLTStdMd.woff');
+    font-weight: 500
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box
+}
+
+body {
+    background: #ffffff !important
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'HelveticaNeue-bold';
+    margin: 0px
+}
+
+p,
+span,
+a {
+    font-family: 'HelveticaNeue-Roman';
+    font-size: 16px
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px 15px
+}
+
+textarea {
+    height: 12rem;
+    line-height: 1.5;
+    width: 100%
+}
+
+.svgMap-tooltip {
+    max-width: 320px;
+    width: 100%;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
+    z-index: 99999
+}
+
+pre,
+fieldset,
+input,
+textarea,
+table,
+table *,
+hr {
+    border-color: #CACACA
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="week"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #fff;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 0.1rem;
+    box-shadow: none;
+    display: block;
+    font-size: 1.6rem;
+    letter-spacing: -0.015em;
+    margin: 0;
+    max-width: 100%;
+    padding: 1.5rem 1.8rem;
+    width: 100%
+}
+
+
+.event_listing_wrap,
+.single_event_wrap {
+    margin-top: 50px;
+    margin-bottom: 50px
+}
+.wrapper_box_feature_img {
+    display: flex;
+    align-items: center;
+}
+.feature_img {
+    margin-left: 20px;
+}
+.all_event_convert_wrap__inner .page-title {
+    margin: 0px;
+    font-family: 'HelveticaNeue-bold';
+    font-style: normal;
+    font-size: 40px;
+    line-height: 49px;
+    color: #000000;
+    text-transform: capitalize;
+    margin-bottom: 10px
+}
+
+.all_event_convert_wrap__inner span {
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000
+}
+
+.sel_timezone_call_tz .disable_btn_confirm,
+.sel_timezone_csingle_eve .disable_btn_confirm {
+    opacity: 1;
+    pointer-events: unset
+}
+
+input.disable_btn_confirm:disabled {
+    opacity: 0.5;
+    pointer-events: none
+}
+
+.disable_btn_confirm {
+    opacity: 0.5;
+    pointer-events: none
+}
+
+.eve_img_on_map {
+    margin-right: 14px
+}
+
+.eve_img_on_map img {
+    max-width: 100%;
+    /* width: 50px;
+    height: 50px */
+}
+
+.btns-eve-wrap {
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap
+}
+
+.all_event_convert_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px
+}
+
+.reset_btn_hide {
+    display: none !important
+}
+
+.wrap_time_loc {
+    display: flex;
+    grid-gap: 40px;
+    margin-bottom: 20px
+}
+
+.wrap_time_loc__inner.wrap_dt {
+    border-right: 1px solid #D1D1D1;
+    padding-right: 40px
+}
+
+.wrap_time_loc .wrap_time_loc__inner .dt_wrap,
+.wrap_time_loc .wrap_time_loc__inner .eve_loc_wrap {
+    font-family: 'HelveticaNeue-bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    text-transform: uppercase;
+    color: #000000
+}
+
+.svgMap-tooltip .svgMap-tooltip-content tr:nth-child(2) td:first-child,
+.svgMap-tooltip .svgMap-tooltip-content tr:nth-child(3) td:first-child {
+    margin-bottom: 0px
+}
+
+.wrap_time_loc .wrap_time_loc__inner p {
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    margin: 0px
+}
+
+.covert_timezone {
+    display: inline-flex
+}
+
+.short_eve_date {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.2em;
+    color: #000000;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-family: 'HelveticaNeue-bold'
+}
+
+.listing-blog-wrapper {
+    display: grid;
+    grid-template-columns: 255px 1fr;
+    grid-column-gap: 28px;
+    margin-bottom: 51px
+}
+
+.wrap_details_event .event_title {
+    margin-bottom: 10px
+}
+
+.wrap_details_event .event_title h4 {
+    font-family: 'HelveticaNeue-bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 10px;
+    display: block
+}
+
+.wrap_details_event .event_title a {
+    text-decoration: none
+}
+
+.wrap_details_event .entry-content br {
+    margin-bottom: 7px !important
+}
+
+.wrap_details_event .entry-content,
+.wrap_details_event .entry-content p,
+.eve-entry-content {
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 20px
+}
+
+.all_event_convert_btn,
+.covert_timezone_btn,
+.all_confirm_btn,
+.confirm_btn,
+.regiter_eve_btn,
+.reset_eve_btn,
+.reset_all_eve_btn,
+.view_all_events {
+    padding: 10px 25px;
+    background: #F64137;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    border: none !important;
+    line-height: 24px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.all_event_convert_btn,
+.covert_timezone_btn,
+.all_confirm_btn,
+.confirm_btn,
+.regiter_eve_btn,
+.reset_eve_btn,
+.reset_all_eve_btn,
+.view_all_events{
+  
+    vertical-align: middle;
+    position: relative;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center; 
+}
+
+
+.view_all_events__wrap {
+    margin-top: 30px;
+}
+
+.reset_eve_btn,
+.reset_all_eve_btn {
+    text-transform: capitalize
+}
+span.mail_send {
+    color: #008000 !important;
+}
+.reset_eve_btn:hover,
+.reset_all_eve_btn:hover {
+    text-decoration: none
+}
+
+.wrap_share_popup,
+.on_map_wrap {
+    position: relative
+}
+
+input.shareviaemail {
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    padding: 10px 11px 9px 11px
+}
+
+input.shareviaemail::placeholder {
+    opacity: 0.4
+}
+
+.wrap_map_share_popup .wrap_share_title span {
+    color: red;
+    font-size: 11px;
+    text-transform: capitalize;
+    margin-left: 5px
+}
+
+.read_bio_share {
+    background: #3761f6
+}
+
+.wrap_share_popup .download_img {
+    cursor: pointer;
+    margin-right: 5px;
+    background: #F64137
+}
+
+.wrap_share_popup .wrap_both_btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 9
+}
+
+.popup {
+    width: 60%
+}
+
+.covert_timezone.active_timezone .popup {
+    display: block !important
+}
+
+.popup {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.75);
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1001;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    z-index: 999
+}
+
+.popup .popup-content {
+    background-color: #ffffff;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    -webkit-box-shadow: 0px 2px 6px black;
+    box-shadow: 0px 2px 6px black;
+    border-radius: 3px;
+    position: relative;
+    padding: 30px 91px 37px 30px;
+    border: 2px solid #fff
+}
+
+.popup-content__wrap .content_wrap .event-title,
+.popup-content__wrap .single_content_wrap .single-event-title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    font-family: 'HelveticaNeue-bold';
+    text-transform: capitalize;
+    color: #000000;
+    margin-bottom: 15px
+}
+
+.popup-content__wrap .single_content_wrap .pop-eve-date {
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: #000000
+}
+
+.popup-content__wrap .single_content_wrap .single-event-title {
+    margin-bottom: 3px
+}
+
+.popup-content__wrap .single_content_wrap .select_ur_timezone {
+    margin-top: 15px
+}
+
+.popup-content__wrap .content_wrap .select_ur_timezone .tz_heading_pu,
+.popup-content__wrap .single_content_wrap .select_ur_timezone .tz_heading_pu {
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 18px;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 5px;
+    display: block
+}
+
+.close-button svg {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 20px
+}
+
+input:focus,
+span:focus,
+a:focus {
+    outline: none
+}
+
+.popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz .all_confirm_btn,
+.popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .single_eve_tz_p {
+    padding: 15px 25px;
+    background: #F64137;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-transform: capitalize;
+    border: none;
+    cursor: pointer
+}
+
+/* today css */
+.tz_dynamic:hover {
+    background-color: #F64137;
+    color: #ffffff;
+}
+
+.tz_dynamic {
+    border-bottom: 1px solid #ccc;
+    color: #000000;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.timezone_via_key {
+    border: 1px solid #ccc;
+    border-top: 0;
+    margin-top: -1px;
+}
+
+.sel_timezone_id:focus {
+    outline: none;
+    border-color: #ccc;
+}
+.sel_timezone_id, .tz_dynamic {
+    font-family: 'HelveticaNeue-Roman';
+    font-size: 16px !important;
+    padding: 15px 20px !important;
+}
+.sel_timezone_csingle_eve {
+    align-items: baseline;
+}
+
+.wrap_tz_aj {
+    position: relative;
+}
+
+.timezone_via_key {
+    position: absolute;
+    background: #fff;
+    width: 100%;
+    z-index: 99;
+}
+/* end today css */
+.popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz,
+.popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve {
+    display: grid;
+    grid-template-columns: 1fr 109px;
+    grid-gap: 20px
+}
+
+.popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz .select2-container--default .select2-selection--single,
+.popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .select2-container--default .select2-selection--single {
+    border: 1px solid #CACACA;
+    border-radius: 0px;
+    height: 44px
+}
+
+.popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz .select2-container--default .select2-selection--single .select2-selection__rendered,
+.popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 40px
+}
+
+.popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz .select2-container--default .select2-selection--single .select2-selection__arrow,
+.popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 44px
+}
+
+.select2-results__option {
+    margin: 0
+}
+
+.wrap_email__inner {
+    position: relative
+}
+
+.tip-icon-success {
+    
+    background: #8BC34A;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    position: relative;
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 400;
+   font-size: 18px;
+}
+
+
+.scroll_off_popup_open {
+    overflow: hidden
+}
+
+.wrap_share_popup .popup .popup-content {
+    padding: 40px 30px 45px 30px
+}
+
+.wrap_share_popup .popup,
+.popup.popup-eve {
+    z-index: 100000
+}
+
+.wrap_email__inner a {
+    position: absolute;
+    top: 50%;
+    transform: translate(50%, -50%);
+    right: 35px;
+    color: red;
+    text-decoration: none
+}
+
+.wrap_email {
+    margin-top: 35px
+}
+
+.wrap_social,
+.wrap_message {
+    margin-top: 20px
+}
+
+.wrap_share_title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 7px
+}
+
+.wrap_social__inner {
+    width: 70%
+}
+
+.event_post-thumbnail {
+    border: 1px solid #D1D1D1;
+    padding: 33px 23px;
+    display: grid;
+    place-items: center;
+    position: relative
+}
+
+.short_eve_date_m .shortest_month_eve {
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    color: #FFFFFF;
+    text-transform: uppercase
+}
+
+.short_eve_date_m .short_date_eve {
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 31px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+    text-transform: uppercase
+}
+
+.short_eve_date_m {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    left: 0;
+    background: #0066B3;
+    bottom: 0;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center
+}
+
+.event_post-thumbnail a {
+    display: block;
+    width: 100%
+}
+
+.event_post-thumbnail img {
+    width: 100%
+}
+
+.wrap_social__inner svg {
+    margin: 0 auto
+}
+
+.wrap_social__inner {
+    display: flex;
+    align-items: center;
+    grid-gap: 54px
+}
+
+.wrap_social__inner a {
+    color: #000;
+    text-decoration: none
+}
+
+.box_eve_detail {
+    border: 1px solid #CACACA;
+    padding: 20px 29px;
+    display: inline-block;
+    margin-bottom: 5px
+}
+
+.eve_tz_sing_wrap {
+    display: flex;
+    justify-content: flex-start;
+    grid-gap: 70px
+}
+
+.eve_tz_sing_wrap .eve_tz_sing span {
+    font-family: 'HelveticaNeue-bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    text-transform: uppercase;
+    color: #000000
+}
+
+.eve_tz_sing_wrap .eve_tz_sing p {
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    margin: 0px
+}
+
+.note_c {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 20px;
+    font-family: 'HelveticaNeue-Roman'
+}
+
+.eve_tz_title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 11px
+}
+
+.wrap_single_eve_note_desc {
+    max-width: 817px;
+    width: 100%
+}
+
+.eve_tz_sing_wrap__inner {
+    display: flex;
+    grid-gap: 70px
+}
+
+.location_single_eve {
+    width: 225px
+}
+
+.svgMap-map-wrapper {
+    background: #101625;
+    height: 700px
+}
+
+.select2-dropdown {
+    z-index: 99999999
+}
+
+.svgMap-map-wrapper .svgMap-country {
+    stroke: transparent
+}
+
+.wrap_map_share_popup {
+    margin-top: 33px
+}
+
+.svgMap-map-controls-wrapper {
+    display: none !important
+}
+
+.svgMap-tooltip-content table {
+    margin: 0px !important
+}
+
+.svgMap-tooltip-content tr td {
+    padding: 10px !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    font-family: 'HelveticaNeue-Roman';
+    border: 1px solid #000
+}
+
+.svgMap-tooltip .svgMap-tooltip-title {
+    font-size: 14px
+}
+
+.svgMap-tooltip-title {
+    font-family: 'HelveticaNeue-bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000000;
+    margin-bottom: 7px
+}
+
+.svgMap-tooltip-title {
+    display: none
+}
+
+.svgMap-tooltip .svgMap-tooltip-content tr:first-child {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.5);
+    display: table;
+    width: 100%
+}
+
+.svgMap-tooltip .svgMap-tooltip-content tr td:nth-child(2) {
+    font-family: 'HelveticaNeue-Roman';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    text-transform: unset;
+    margin-left: 17px
+}
+
+.svgMap-tooltip .svgMap-tooltip-content tr:nth-child(2) td:first-child {
+    margin-top: 11px
+}
+
+.svgMap-tooltip .svgMap-tooltip-content tr:first-child td:nth-child(2) {
+    margin-left: 0;
+    margin-bottom: 11px;
+    align-items: baseline
+}
+
+.svgMap-tooltip .svgMap-tooltip-content tr td {
+    font-family: 'HelveticaNeue-bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 18px;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 7px;
+    border: none;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding: 0 !important
+}
+
+.svgMap-tooltip .svgMap-tooltip-content table {
+    border: none !important;
+    white-space: break-spaces
+}
+
+.svgMap-tooltip .svgMap-tooltip-content-container {
+    padding: 17px 16px
+}
+
+.svgMap-tooltip .svgMap-tooltip-content tr td svg {
+    margin-right: 5px
+}
+
+.wrap_pagination_events {
+    display: flex;
+    justify-content: center
+}
+
+.wrap_pagination_events .page-numbers {
+    padding: 5px 10px;
+    border: 1px solid #D1D1D1;
+    margin: 5px;
+    text-decoration: none;
+    color: #000;
+    display: grid;
+    place-items: center
+}
+
+.wrap_pagination_events span.page-numbers.current {
+    border-color: #0066B3;
+    color: #0066B3
+}
+
+.wrap_map_share_popup .wrap_share_popup .popup-content {
+    padding: 30px 30px 41px 30px
+}
+
+.wrap_message__inner textarea {
+    max-height: 80px;
+    padding: 10px 11px;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'HelveticaNeue-Roman'
+}
+
+.wrap_email__inner input {
+    max-height: 44px
+}
+
+.wrap_map_share_popup .wrap_share_popup .wrap_social {
+    margin-top: 18px
+}
+
+.wrap_map_share_popup .wrap_share_popup .wrap_social__inner {
+    margin-bottom: 16px
+}
+
+.wrap_map_share_popup .wrap_share_popup .wrap_social__inner .social_icon {
+    max-width: 70px;
+    cursor: pointer
+}
+
+.wrap_map_share_popup .wrap_share_popup .wrap_social__inner .social_icon:last-child {
+    margin-right: 0px
+}
+
+.wrap_map_share_popup .wrap_share_popup .email_box {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 400;
+    font-size: 16px;
+    color: #F64137;
+    cursor: pointer
+}
+
+.wrap_map_share_popup .wrap_share_popup .wrap_email {
+    margin-top: 30px
+}
+
+table td {
+    border-top: 1px solid #000;
+    border-spacing: 0 !important;
+    vertical-align: baseline
+}
+
+table tr td:first-child {
+    border-right: 1px solid
+}
+
+.wrap_map_share_popup {
+    position: relative
+}
+
+.single_on_map_wrap {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9;
+    display: flex;
+    align-items: center
+}
+
+.eve_title_on_map {
+    color: #ffffff
+}
+
+.single_event_cookie_store .eve_heading,
+.single_event_cookie_store .eve_heading span {
+    font-family: 'HelveticaNeue-bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    color: #000000;
+    margin-bottom: 5px
+}
+
+.single_event_cookie_store .eve_heading.heading_broadcast,
+.single_event_cookie_store .eve_heading.heading_broadcast span {
+    font-size: 28px;
+    margin-bottom: 33px
+}
+
+.wrap_map_share_popup .wrap_share_title {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-family: 'HelveticaNeue-bold';
+    font-weight: 500
+}
+
+@media(max-width:1439px) {
+    .container {
+        max-width: calc(100% - 10%)
+    }
+}
+
+@media(max-width:978px) {
+    .location_single_eve {
+        width: unset;
+        margin-top: 15px
+    }
+    .eve_tz_sing_wrap {
+        display: block
+    }
+}
+
+@media(max-width:899px) {
+    .single_on_map_wrap {
+        bottom: 15px;
+        left: 15px
+    }
+    .eve_img_on_map {
+        margin-right: 10px
+    }
+    .all_event_convert_wrap {
+        flex-wrap: wrap
+    }
+    .all_event_convert_wrap__innerbtn {
+        margin-top: 15px
+    }
+}
+
+@media(max-width:767px) {
+    .single_event_cookie_store .eve_heading,
+.single_event_cookie_store .eve_heading span {
+
+    font-size: 28px;
+    line-height: 32px;
+
+    margin-bottom: 10px
+}
+
+.single_event_cookie_store .eve_heading.heading_broadcast,
+.single_event_cookie_store .eve_heading.heading_broadcast span {
+    font-size: 22px;
+
+}
+
+    .wrapper_box_feature_img {flex-direction: column;}
+
+    .feature_img {
+        margin: 10px auto;
+    }
+    .box_eve_detail {
+        padding: 20px 15px
+    }
+    .svgMap-tooltip.svgMap-active {
+        left: 50% !important
+    }
+    .wrap_map_share_popup .wrap_share_popup .popup-content {
+        padding: 30px 15px 35px 15px
+    }
+    .wrap_share_title {
+        margin-bottom: 5px
+    }
+    .close-button svg {
+        top: 15px;
+        right: 15px
+    }
+    .eve_tz_sing_wrap__inner {
+        grid-gap: 25px
+    }
+    .all_event_convert_wrap__inner {
+        margin-bottom: 15px
+    }
+    .all_event_convert_wrap {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 35px
+    }
+    .listing-blog-wrapper {
+        grid-template-columns: 1fr;
+        grid-row-gap: 28px
+    }
+    .popup .popup-content {
+        max-width: 100%;
+        width: calc(100% - 15px);
+        padding: 30px 15px
+    }
+    .wrap_map_share_popup .wrap_share_popup .wrap_social__inner .social_icon {
+        margin-right: 20px
+    }
+}
+
+@media(max-width:600px) {
+  
+    .eve_tz_sing_wrap__inner {
+        display: block
+    }
+    .eve_tz_sing:not(:last-child) {
+        margin-bottom: 15px
+    }
+}
+
+@media(max-width:499px) {
+    .wrap_social__inner {
+        grid-gap: 15px
+    }
+    .wrap_social__inner .social_icon span:first-child {
+        margin-bottom: 10px;
+        display: block
+    }
+    .wrap_message__inner textarea {
+        max-height: 95px
+    }
+    .wrap_social__inner {
+        width: 100%
+    }
+    .container {
+        max-width: calc(100% - 5px)
+    }
+    .event_listing_wrap,
+    .single_event_wrap {
+        margin-top: 30px;
+        margin-bottom: 30px
+    }
+    .listing-blog-wrapper {
+        grid-row-gap: 15px
+    }
+    .wrap_time_loc {
+        flex-direction: column;
+        grid-gap: 20px
+    }
+    .wrap_time_loc__inner.wrap_dt {
+        border-right: none;
+        padding-right: 0px;
+        border-bottom: 1px solid #D1D1D1;
+        padding-bottom: 20px
+    }
+    .event_post-thumbnail a img {
+        margin: 0 auto
+    }
+    .all_event_convert_wrap__inner .page-title {
+        font-size: 28px;
+        margin-bottom: 0px
+    }
+    .all_event_convert_wrap__inner span {
+        font-size: 20px;
+        line-height: 24px
+    }
+    .all_event_convert_wrap {
+        margin-bottom: 50px
+    }
+ 
+    .eve_tz_sing_wrap {
+        flex-direction: column;
+        grid-gap: 20px
+    }
+    .wrap_map_share_popup {
+        margin-top: 42px
+    }
+    .svgMap-map-wrapper {
+        height: 100vh
+    }
+    .popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz,
+    .popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve {
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+    }
+    .popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz .all_confirm_btn,
+    .popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .single_eve_tz_p {
+        max-width: 109px
+    }
+}
+
+@media(max-width:320px) {
+    .svgMap-tooltip.svgMap-active {
+        max-width: unset;
+        width: 80%
+    }
+}
