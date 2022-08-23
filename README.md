@@ -1,6 +1,12 @@
 # Time Convert App
 
 **Welcome to the Time Convert App GitHub repository. Time Convert App provide adds custom post-type Events and provides an option for time conversation on the frontend side**
+## How to install the plugin
+Plugin can be installed with two methods:
+1. Download the repositry and make zip file of "nasa-time-converter-app" and then upload the zip under WordPress Dashboard -> Plugins -> Add new plugin.
+2. Clone the repositry and upload "nasa-time-converter-app" directory on the server under wp-content/plugins 
+
+After installtion it should start showing the plugin under plugins area and it can be activated from the same area.
 
 ## Creating Event
 Plugin register a custom post type **Events** in which you can add the event-related data like title, description, event location, registration link, lunch and broadcast date, etc. Also, the Plugin uses the selected timezone for the map on the single event page, and based on the selected timezone it will show the map.
