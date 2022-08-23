@@ -1,6 +1,6 @@
 # Time Convertor Application
 
-**Welcome to the Time Convertor App GitHub repository. Time Convert App provide adds custom post-type Events and provides an option for time conversion on the frontend interface**
+**Welcome to the Time Convertor App GitHub repository.The Time Convertor App provide adds custom post-type Events and provides an option for time conversion on an intuitive frontend interface**
 ## How to install the plugin
 The Plugin can be installed with two methods:
 1. Download the repository and make a zip file of "nasa-time-converter-app" and then upload the zip under the WordPress Dashboard -> Plugins -> Add new plugin.
