@@ -1,0 +1,16 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+.width-100{
+    width: 100%;
+}
+.event-text{
+    width: 150px
+}
+.type_of_event{
+    width: 100px;
+}
+.time_zone_nasa{
+    width: 150px;
+}
