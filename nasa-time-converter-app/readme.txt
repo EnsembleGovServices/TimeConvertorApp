@@ -2,8 +2,10 @@
 Tags: nasa, timezone, time convertor, events
 Requires at least: 4.7
 Tested up to: 6.1
+Stable tag: 1.0.0
 Requires PHP: 7.0
-License: GPL-2.0+
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 The plugin allows adding events along with the timezone convert option.
 

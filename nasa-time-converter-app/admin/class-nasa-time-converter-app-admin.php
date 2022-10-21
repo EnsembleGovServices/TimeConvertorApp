@@ -177,11 +177,11 @@ function display_event_meta_box($event_d)
                 <td><input type="text" size="80" placeholder="<?php esc_attr_e('Enter the link to registration'); ?>" name="event_d_participate_name" value="<?php echo $event_participate; ?>" /></td>
             </tr>
             <tr>
-                <td class="width-100"><?php esc_html_e('Local Time & Date of Nasa Launch', 'nasa-tca'); ?> </td>
+                <td class="width-100"><?php esc_html_e('Local Time & Date of Event Launch', 'nasa-tca'); ?> </td>
                 <td><input type="datetime-local" placeholder="<?php esc_attr_e('Enter the link to registration'); ?>" name="event_d_nasa_launch" value="<?php echo $event_nasa_launch; ?>" /></td>
             </tr>
             <tr>
-                <td class="width-100"><?php esc_html_e('Local Time & Date of Nasa broadcast', 'nasa-tca'); ?> </td>
+                <td class="width-100"><?php esc_html_e('Local Time & Date of Event Broadcast', 'nasa-tca'); ?> </td>
                 <td><input type="datetime-local" placeholder="<?php esc_attr_e('Enter the link to registration'); ?>" name="event_d_nasa_broadcast" value="<?php echo $event_nasa_broadcast; ?>" /></td>
             </tr>
             <tr>
@@ -196,7 +196,7 @@ function display_event_meta_box($event_d)
                 </td>
             </tr>
             <tr>
-                <td class="time_zone_nasa"><?php esc_html_e('Time zone of nasa event', 'nasa-tca'); ?> </td>
+                <td class="time_zone_nasa"><?php esc_html_e('Time zone of Event', 'nasa-tca'); ?> </td>
                 <td>
                     <select class="timezone_of_event_opt" name="timezone_of_event">
         
