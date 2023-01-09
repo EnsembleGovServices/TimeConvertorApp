@@ -76,6 +76,7 @@ class Nasa_Time_Converter_App_Admin {
         
 		if (get_post_type() == 'event') {
 			wp_enqueue_script('adm-select2-js', plugin_dir_url( __FILE__ ) . 'js/select2.min.js', array('jquery'), $this->version, false);
+            wp_enqueue_script('adm-custom-js', plugin_dir_url( __FILE__ ) . 'js/nasa-time-converter-app-admin.js', array('jquery'), $this->version, false);
 		}
 	}
 
@@ -118,6 +119,7 @@ function nasa_custom_post_type()
         'labels'        =>   $labels,
         'description'   =>   __('A list of upcoming events', 'nasa-tca'),
         'public'        =>   true,
+        'publicly_queryable' => true,
         'show_in_menu'  =>   true,
         'menu_icon'     =>   'dashicons-calendar-alt',
         'has_archive'   =>   false,
@@ -164,6 +166,7 @@ function display_event_meta_box($event_d)
         $event_participate = esc_html(get_post_meta($event_d->ID, 'event_participate', true));
         $event_nasa_launch = esc_html(get_post_meta($event_d->ID, 'event_nasa_launch', true));
         $event_nasa_broadcast = esc_html(get_post_meta($event_d->ID, 'event_nasa_broadcast', true));
+        $event_disclaimer = esc_html(get_post_meta($event_d->ID, 'event_disclaimer', true));
         $event_d_type =  get_post_meta($event_d->ID, 'event_d_type', true);
         $event_d_timezone =  get_post_meta($event_d->ID, 'event_d_timezone', true);
     ?>
@@ -194,6 +197,10 @@ function display_event_meta_box($event_d)
                         <option value="interaction" <?php selected($event_d_type, 'interaction'); ?>><?php esc_html_e('Interaction', 'nasa-tca'); ?></option>
                     </select>
                 </td>
+            </tr>
+            <tr>
+                <td class="event-text"><?php esc_html_e('Event Disclaimer', 'nasa-tca'); ?> </td>
+                <td><textarea placeholder="<?php esc_attr_e('Enter event disclaimer'); ?>" name="event_disclaimer"><?php echo $event_disclaimer; ?></textarea></td>
             </tr>
             <tr>
                 <td class="time_zone_nasa"><?php esc_html_e('Time zone of Event', 'nasa-tca'); ?> </td>
@@ -246,6 +253,10 @@ function add_events_fields($event_d_id,  $event_d)
 
         if (isset($_POST['event_d_nasa_broadcast']) && $_POST['event_d_nasa_broadcast'] != '') {
             update_post_meta($event_d_id, 'event_nasa_broadcast', $_POST['event_d_nasa_broadcast']);
+        }
+
+        if (isset($_POST['event_disclaimer']) && $_POST['event_disclaimer'] != '') {
+            update_post_meta($event_d_id, 'event_disclaimer', $_POST['event_disclaimer']);
         }
 
         if (isset($_POST['type_of_event'])) {

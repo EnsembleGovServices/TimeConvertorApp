@@ -48,8 +48,15 @@ function getCookie(cname) {
 }
 
 jQuery(document).ready(function ($) {
+    
+    $('.sel_timezone_id').select2({
+        dropdownParent: $('.popup.popup-eve')
+    });
+    $('.sel_alltimezone_id').select2();
+    $(document).on('select2:open', () => {
+        document.querySelector('.select2-search__field').focus();
+    });    
     // download image
-
     jQuery('.download_img').click(function () {
         let img_name = $(this).attr("img_name");
         $(".single_event_wrap .tip-icon-success,.single_event_wrap .note_c, .single_event_wrap .btns-eve-wrap .regi_eve_b,.single_event_wrap .btns-eve-wrap .reset_eve_b, .single_event_wrap .btns-eve-wrap .convo_eve_b , .single_event_wrap .wrap_both_btn , .single_event_wrap .view_all_events__wrap").css("display", "none");
@@ -68,8 +75,10 @@ jQuery(document).ready(function ($) {
     // Cookie timezone via date display
     let AllCookie = document.cookie.split(";").reduce((ac, cv, i) => Object.assign(ac, { [cv.split('=')[0]]: cv.split('=')[1] }), {});
     $.each(AllCookie, function (key, value) {
-
         cookie_name_key = key.replace(/\s/g, "");
+        if(cookie_name_key.match(/nevent-[0-9]*\D/g)){
+            return;
+        }
         if (cookie_name_key == 'timezoneset_cookie') {
             $(".covert_timezone_btn").addClass('disable_btn_confirm');
             // timezoneset_cookie
@@ -77,13 +86,15 @@ jQuery(document).ready(function ($) {
                 let c_all_single_event_date = $(this).find(" .listing-blog-wrapper .wrap_details_event .covert_timezone .covert_timezone_btn").attr('eve-date');
                 // $(this).find(" .listing-blog-wrapper .wrap_details_event .covert_timezone .covert_timezone_btn").addClass('disable_btn_confirm');
                 if (c_all_single_event_date != '') {
-                    let c_all_single_eve_dt_tz_con = DateTimeTzConvert(c_all_single_event_date, value, 'dd LLLL y h:mm a ZZZZ');
+                    let c_all_single_eve_dt_tz_con = DateTimeTzConvert(c_all_single_event_date, value, 'dd LLLL y h:mm a');
+                    c_all_single_eve_dt_tz_con = c_all_single_eve_dt_tz_con +" "+AllCookie[' timezoneset_abb'];
                     $(this).find(" .listing-blog-wrapper .wrap_details_event .wrap_time_loc .wrap_time_loc__inner.wrap_dt p").empty();
                     $(this).find(" .listing-blog-wrapper .wrap_details_event .wrap_time_loc .wrap_time_loc__inner.wrap_dt p").text(c_all_single_eve_dt_tz_con);
                 } else {
                     let c_all_eve_bc_date = $(this).find(" .listing-blog-wrapper .wrap_details_event .covert_timezone .covert_timezone_btn").attr('eve-broad-date');
                     if (c_all_eve_bc_date != '') {
-                        let c_all_eve_dt_tz_bc = DateTimeTzConvert(c_all_eve_bc_date, value, 'dd LLLL y h:mm a ZZZZ');
+                        let c_all_eve_dt_tz_bc = DateTimeTzConvert(c_all_eve_bc_date, value, 'dd LLLL y h:mm a');
+                        c_all_eve_dt_tz_bc = c_all_eve_dt_tz_bc +" "+AllCookie[' timezoneset_abb'];
                         $(this).find(" .listing-blog-wrapper .wrap_details_event .wrap_time_loc .wrap_time_loc__inner.wrap_dt p").empty();
                         $(this).find(" .listing-blog-wrapper .wrap_details_event .wrap_time_loc .wrap_time_loc__inner.wrap_dt p").text(c_all_eve_dt_tz_bc);
                     }
@@ -97,19 +108,23 @@ jQuery(document).ready(function ($) {
 
                 // $('.single_event_wrap .wrap_eve_details .btns-eve-wrap .covert_timezone_btn').addClass('disable_btn_confirm');
                 if (c_p_single_event_date != '') {
-                    var c_p_single_eve_dt_tz_con = DateTimeTzConvert(c_p_single_event_date, value, 'dd LLLL y h:mm a ZZZZ');
+                    var c_p_single_eve_dt_tz_con = DateTimeTzConvert(c_p_single_event_date, value, 'dd LLLL y h:mm a');
+                    c_p_single_eve_dt_tz_con = c_p_single_eve_dt_tz_con +" "+AllCookie[' timezoneset_abb'];
                     $(".single_event_wrap .box_eve_detail .eve_tz_sing .launch_D").empty();
                     $(".single_event_wrap .box_eve_detail .eve_tz_sing .launch_D").text(c_p_single_eve_dt_tz_con);
                 }
 
                 if (c_pb_single_event_date != '') {
-                    var c_pb_single_eve_dt_tz_con = DateTimeTzConvert(c_pb_single_event_date, value, 'dd LLLL y h:mm a ZZZZ');
+                    var c_pb_single_eve_dt_tz_con = DateTimeTzConvert(c_pb_single_event_date, value, 'dd LLLL y h:mm a');
+                    c_pb_single_eve_dt_tz_con = c_pb_single_eve_dt_tz_con +" "+AllCookie[' timezoneset_abb'];
                     $(".single_event_wrap .box_eve_detail .eve_tz_sing .broadcast_D").empty();
                     $(".single_event_wrap .box_eve_detail .eve_tz_sing .broadcast_D").text(c_pb_single_eve_dt_tz_con);
                 }
+                $(".single_event_wrap .box_eve_detail .eve_tz_title").empty();
+                $(".single_event_wrap .box_eve_detail .eve_tz_title").text(AllCookie[' timezoneset_timezone'])
 
             }
-            let todate_full_timezone = DateTime.now().setZone(value).toFormat('ZZZZZ');
+            let todate_full_timezone = AllCookie[' timezoneset_abb'];
 
             $('[popup-open="popup-h-all_tz"]').empty();
             $('[popup-open="popup-h-all_tz"]').text("Change timezone");
@@ -118,32 +133,34 @@ jQuery(document).ready(function ($) {
             $('.reset_eve_btn').removeClass('reset_btn_hide');
         } else {
 
-            if (key.match(/nevent-/g) != null) {
+            if (key.match(/nevent-\d*$/g) != null) {
 
                 var eve_split_c_id = key.split('-');
-
                 if ($("body").hasClass("single-event")) {
 
                     let p_eve_id_check = $('article').attr('id');
                     var p_eve_split_id_check = p_eve_id_check.split('-');
                     if (p_eve_split_id_check[1] == eve_split_c_id[1]) {
-
+                        const abbcookie = ' n'+p_eve_id_check+'abb';
+                        const timezonecookie = ' n'+p_eve_id_check+'timezone';
                         $(".reset_eve_btn").removeClass('reset_btn_hide');
                         let c_p_single_event_date = $('.single_event_wrap .wrap_eve_details .btns-eve-wrap .covert_timezone_btn').attr('eve-date');
                         let c_pb_single_event_date = $('.single_event_wrap .wrap_eve_details .btns-eve-wrap .covert_timezone_btn').attr('eve-broad-date');
 
                         $('.single_event_wrap .wrap_eve_details .btns-eve-wrap .covert_timezone_btn').addClass('disable_btn_confirm');
                         if (c_p_single_event_date != '') {
-                            var c_p_single_eve_dt_tz_con = DateTimeTzConvert(c_p_single_event_date, value, 'dd LLLL y h:mm a ZZZZ');
+                            var c_p_single_eve_dt_tz_con = DateTimeTzConvert(c_p_single_event_date, value, 'dd LLLL y h:mm a');
+                            c_p_single_eve_dt_tz_con = c_p_single_eve_dt_tz_con +" "+AllCookie[abbcookie]
                             $(".single_event_wrap .box_eve_detail .eve_tz_sing .launch_D").empty();
                             $(".single_event_wrap .box_eve_detail .eve_tz_sing .launch_D").text(c_p_single_eve_dt_tz_con);
-                            var c_p_single_eve__tz_con = DateTimeTzConvert(c_p_single_event_date, value, 'ZZZZZ');
+                            var c_p_single_eve__tz_con = AllCookie[timezonecookie]
                             $(".single_event_wrap .box_eve_detail .eve_tz_title").empty();
                             $(".single_event_wrap .box_eve_detail .eve_tz_title").text(c_p_single_eve__tz_con);
                         }
 
                         if (c_pb_single_event_date != '') {
-                            var c_pb_single_eve_dt_tz_con = DateTimeTzConvert(c_pb_single_event_date, value, 'dd LLLL y h:mm a ZZZZ');
+                            var c_pb_single_eve_dt_tz_con = DateTimeTzConvert(c_pb_single_event_date, value, 'dd LLLL y h:mm a');
+                            c_pb_single_eve_dt_tz_con = c_pb_single_eve_dt_tz_con + " "+AllCookie[abbcookie]
                             $(".single_event_wrap .box_eve_detail .eve_tz_sing .broadcast_D").empty();
                             $(".single_event_wrap .box_eve_detail .eve_tz_sing .broadcast_D").text(c_pb_single_eve_dt_tz_con);
                         }
@@ -153,15 +170,17 @@ jQuery(document).ready(function ($) {
                 } else {
                     $(".reset_eve_btn").removeClass('reset_btn_hide');
                     var co_ev_get_date = $(".eve_single_popup_btn_" + eve_split_c_id[1]).attr('eve-date');
-
+                    let abbcookies = ' nevent-'+ eve_split_c_id[1]+'abb';
                     $(".eve_single_popup_btn_" + eve_split_c_id[1]).addClass('disable_btn_confirm');
                     if (co_ev_get_date != '') {
-                        let single_eve_dt_tz_con = DateTimeTzConvert(co_ev_get_date, value, 'dd LLLL y h:mm a ZZZZ');
+                        let single_eve_dt_tz_con = DateTimeTzConvert(co_ev_get_date, value, 'dd LLLL y h:mm a');
+                        single_eve_dt_tz_con = single_eve_dt_tz_con +" "+ AllCookie[abbcookies];
                         $(".eve_d_" + eve_split_c_id[1]).text(single_eve_dt_tz_con);
                     } else {
                         var co_ev_get_date_bc = $(".eve_single_popup_btn_" + eve_split_c_id[1]).attr('eve-broad-date');
                         if (co_ev_get_date_bc != '') {
-                            let single_eve_dt_tz_con_bc = DateTimeTzConvert(co_ev_get_date_bc, value, 'dd LLLL y h:mm a ZZZZ');
+                            let single_eve_dt_tz_con_bc = DateTimeTzConvert(co_ev_get_date_bc, value, 'dd LLLL y h:mm a');
+                            single_eve_dt_tz_con_bc = single_eve_dt_tz_con_bc +" "+AllCookie[abbcookies];
                             $(".eve_d_" + eve_split_c_id[1]).text(single_eve_dt_tz_con_bc);
                         }
                     }
@@ -169,7 +188,7 @@ jQuery(document).ready(function ($) {
 
 
 
-            } else {
+            } else if (key.match(/nevent-\d/g) == null) {
                 if ($("body").hasClass("single-event")) {
                     //     let p_eve_id_check = $('article').attr('id');
                     //     var p_eve_split_id_check = p_eve_id_check.split('-');
@@ -227,54 +246,6 @@ jQuery(document).ready(function ($) {
 
     });
 
-    $(".sel_timezone_id").keyup(function (event) {
-        var s = $(this).val();
-        $.ajax({
-            url: userdata.ajax_url,
-            dataType: 'json',
-            data: {
-                action: 'searchregion', // search term
-                term: s
-            },
-            success: function (data) {
-                let tz_result = data.results;
-                jQuery(".timezone_via_key").empty();
-
-                if ($.isArray(tz_result)) {
-                    tz_result.forEach(function (i) {
-                        $(".timezone_via_key").append('<div class="tz_dynamic" tz_val_key="' + i.id + '">' + i.text + '</div>');
-                    });
-                }
-                jQuery('.tz_dynamic').click(function () {
-                    let tz_val_key = $(this).attr('tz_val_key');
-                    let tz_val_text = $(this).text();
-           
-                    jQuery(this).parents().find('.sel_timezone_id').val(tz_val_text);
-                    jQuery(this).parents().find('.sel_timezone_id').attr('value', tz_val_key);
-                    if($(this).parents('.timezone_via_key').hasClass('all_tz_ky')){
-                        if (tz_val_key != '') {
-                            $(".all_confirm_btn").removeAttr('disabled');
-                        } else {
-                            $(".all_confirm_btn").attr('disabled', 'disabled');
-                        }
-                    }else{
-                        if (tz_val_key != '') {
-                            $(".single_eve_tz_p.disable_btn_confirm").removeAttr('disabled');
-                        } else {
-                            $(".single_eve_tz_p.disable_btn_confirm").attr('disabled', 'disabled');
-                        }
-                    }
-                   
-                    $(".timezone_via_key").empty();
-                });
-
-            },
-            error: function (data) {
-                // test to see what you get back on error
-                console.log(data);
-            }
-        });
-    });
 
 
 
@@ -284,8 +255,12 @@ jQuery(document).ready(function ($) {
         if (reset_eve_id != '' && reset_eve_id != 0 && reset_eve_id != undefined) {
             var cookie_name_reset = 'nevent-' + reset_eve_id;
             deleteCookie(cookie_name_reset);
+            deleteCookie(cookie_name_reset+'ab');
+            deleteCookie(cookie_name_reset+'timezone');
         } else {
             deleteCookie("timezoneset_cookie");
+            deleteCookie("timezoneset_abb");
+            deleteCookie("timezoneset_timezone");
             let obj = document.cookie.split(";").reduce((ac, cv, i) => Object.assign(ac, { [cv.split('=')[0]]: cv.split('=')[1] }), {});
 
             $.each(obj, function (key, value) {
@@ -298,14 +273,22 @@ jQuery(document).ready(function ($) {
     });
 
     // Set cookie consent
-    function acceptCookieTimezoneEvent(selector_parent, event_id = 0) {
+    function acceptCookieTimezoneEvent(selector_parent, aberration, timezonName, event_id = 0) {
         if (event_id != '' || event_id != 0) {
             var cookie_name = 'nevent-' + event_id;
             deleteCookie(cookie_name);
+            deleteCookie(cookie_name+'abb');
+            deleteCookie(cookie_name+'timezone');
             setCookie(cookie_name, selector_parent, 30);
+            setCookie(cookie_name+'abb', aberration, 30);
+            setCookie(cookie_name+'timezone', timezonName, 30);
         } else {
             deleteCookie('timezoneset_cookie');
+            deleteCookie('timezoneset_abb');
+            deleteCookie('timezoneset_timezone');
             setCookie('timezoneset_cookie', selector_parent, 30);
+            setCookie('timezoneset_abb', aberration, 30);
+            setCookie('timezoneset_timezone', timezonName, 30);
         }
     }
 
@@ -357,8 +340,10 @@ jQuery(document).ready(function ($) {
 
     // Set cookie single event
     $(".confirm_btn").click(function () {
-        var selector_parent = $(this).parent().find('.sel_timezone_id').attr('value');
-
+        var selector_parent = $(this).parent().find('.sel_timezone_id').val();
+        var selectedOption = $(this).parent().find('.sel_timezone_id');
+        var aberration = selectedOption.select2().find(":selected").data("abbri");
+        var selected_timezone = selectedOption.select2().find(":selected").data("timezone");
         // var selector_parent = $(this).parent().find('.sel_timezone_id option:selected').val();
         var event_id = $(this).attr('event_id_c');
         var single_event_date = $(this).attr('single_event_date');
@@ -366,36 +351,56 @@ jQuery(document).ready(function ($) {
         // var countryCode = $(this).parent().find('.sel_timezone_id option:selected').attr('data-countryCode');
 
 
-        acceptCookieTimezoneEvent(selector_parent, event_id);
+        acceptCookieTimezoneEvent(selector_parent, aberration, selected_timezone, event_id);
 
         if ($(this).hasClass("single_page_eve_tz")) {
             $(".reset_eve_btn").removeClass('reset_btn_hide');
             $(".covert_timezone_btn").addClass("disable_btn_confirm");
+            $(".single_event_wrap .box_eve_detail .eve_tz_title").empty();
+            $(".single_event_wrap .box_eve_detail .eve_tz_title").text(selected_timezone)
+            $(".nasa_timezon-wrapper--column.user-time-column .timezon-header-title p").text(selected_timezone);
             if (single_event_date != '') {
-                let single_eve_dt_tz_con = DateTimeTzConvert(single_event_date, selector_parent, 'dd LLLL y h:mm a ZZZZ');
-                $(".eve_tz_sing .launch_D").empty();
+                let single_eve_dt_tz_con = DateTimeTzConvert(single_event_date, selector_parent, 'dd LLLL y h:mm a');
+                single_eve_dt_tz_con = single_eve_dt_tz_con+" "+aberration;
+                let single_eve_time = DateTimeTzConvert(single_event_date, selector_parent, 'h:mm a');
+                single_eve_time = single_eve_time +" "+aberration;
+                $(".eve_tz_sing .launch_D, .eve_heading.heading_launch span").empty();
                 $(".eve_tz_sing .launch_D").text(single_eve_dt_tz_con);
+                $(".eve_heading.heading_launch span").text(single_eve_time);
+                $(".nasa_timezon-wrapper--column.user-time-column").removeClass('hide-block');
+                $(".nasa_timezon-wrapper--column.user-time-column .user-lunch-time-bottom").removeClass('hide-block');
+                $(".nasa_timezon-wrapper--column.user-time-column .user-lunch-time-bottom p").text(single_eve_dt_tz_con);
             }
             if (single_eve_broad_date != '') {
-                let single_eve_broad_tz_con = DateTimeTzConvert(single_eve_broad_date, selector_parent, 'dd LLLL y h:mm a ZZZZ');
-                $(".eve_tz_sing .broadcast_D").empty();
+                let single_eve_broad_tz_con = DateTimeTzConvert(single_eve_broad_date, selector_parent, 'dd LLLL y h:mm a');
+                single_eve_broad_tz_con = single_eve_broad_tz_con+" "+aberration;
+                let single_eve_broad_time= DateTimeTzConvert(single_eve_broad_date, selector_parent, 'h:mm a');
+                single_eve_broad_time = single_eve_broad_time +" "+aberration;
+                $(".eve_tz_sing .broadcast_D, .eve_heading.heading_broadcast span").empty();
                 $(".eve_tz_sing .broadcast_D").text(single_eve_broad_tz_con);
+                $(".eve_heading.heading_broadcast span").text(single_eve_broad_time);
+                $(".nasa_timezon-wrapper--column.user-time-column").removeClass('hide-block');
+                $(".nasa_timezon-wrapper--column.user-time-column .user-broad-time-bottom").removeClass('hide-block');
+                $(".nasa_timezon-wrapper--column.user-time-column .user-broad-time-bottom p").text(single_eve_broad_tz_con);
             }
-            location.reload();
+            //location.reload();
+            $('[popup-close-eve]').click();
         } else {
             if (single_event_date != '') {
-                let single_eve_dt_tz_con = DateTimeTzConvert(single_event_date, selector_parent, 'dd LLLL y h:mm a ZZZZ');
+                let single_eve_dt_tz_con = DateTimeTzConvert(single_event_date, selector_parent, 'dd LLLL y h:mm a');
                 let only_day_d = DateTimeTzConvert(single_event_date, selector_parent, 'dd');
                 $(".short_d_eve_" + event_id).empty();
                 $(".short_d_eve_" + event_id).text(only_day_d);
+                single_eve_dt_tz_con = single_eve_dt_tz_con+" "+aberration;
                 $(".wrap_time_loc__inner.wrap_dt .eve_d_" + event_id).empty();
                 $(".wrap_time_loc__inner.wrap_dt .eve_d_" + event_id).text(single_eve_dt_tz_con);
             } else {
                 if (single_eve_broad_date != '') {
-                    let single_eve_dt_tz_con = DateTimeTzConvert(single_eve_broad_date, selector_parent, 'dd LLLL y h:mm a ZZZZ');
+                    let single_eve_dt_tz_con = DateTimeTzConvert(single_eve_broad_date, selector_parent, 'dd LLLL y h:mm a');
                     let only_day_d = DateTimeTzConvert(single_eve_broad_date, selector_parent, 'dd');
                     $(".short_d_eve_" + event_id).empty();
                     $(".short_d_eve_" + event_id).text(only_day_d);
+                    single_eve_dt_tz_con = single_eve_dt_tz_con+" "+aberration;
                     $(".wrap_time_loc__inner.wrap_dt .eve_d_" + event_id).empty();
                     $(".wrap_time_loc__inner.wrap_dt .eve_d_" + event_id).text(single_eve_dt_tz_con);
                 }
@@ -410,9 +415,13 @@ jQuery(document).ready(function ($) {
     // Set cookie all event
     $(".all_confirm_btn").click(function () {
         // var selector_parent = $(this).parent().find('.sel_timezone_id option:selected').val();
-        var selector_parent = $(this).parent().find('.sel_timezone_id').attr('value');
+        var selector_parent = $(this).parent().find('.sel_alltimezone_id').val();
+        var selectedOption = $(this).parent().find('.sel_alltimezone_id');
+        var aberration = selectedOption.select2().find(":selected").data("abbri");
+        var selected_timezone = selectedOption.select2().find(":selected").data("timezone");
+
         let alt_Tz;
-        acceptCookieTimezoneEvent(selector_parent);
+        acceptCookieTimezoneEvent(selector_parent, aberration, selected_timezone);
         $("article.event_article").each(function (index) {
             let all_single_event_date = $(this).find(" .listing-blog-wrapper .wrap_details_event .covert_timezone .covert_timezone_btn").attr('eve-date');
             $(this).find(" .listing-blog-wrapper .wrap_details_event .covert_timezone .covert_timezone_btn").addClass('disable_btn_confirm');

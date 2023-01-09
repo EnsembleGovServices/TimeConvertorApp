@@ -46,6 +46,9 @@ while (have_posts()) :
 
     // Registration Link
     $event_participate = get_post_meta(get_the_ID(), 'event_participate', true);
+
+    // Event Disclaimer
+    $event_disclaim = get_post_meta(get_the_ID(), 'event_disclaimer', true);
 ?>
     <div class="single_event_wrap">
         <div class="container">
@@ -91,7 +94,13 @@ while (have_posts()) :
                             <?php if (!empty($event_nasa_launch_c && $event_nasa_tz_c) || !empty($event_nasa_broadcast_c && $event_nasa_tz_c) || !empty($event_location)) { ?>
                                 <div class="box_eve_detail">
                                     <!-- TimeZone Alternative Name  -->
-                                    <h2 class="eve_tz_title"> </h2>
+                                    <h2 class="eve_tz_title"><?php
+                                        if($event_nasa_tz_c){
+                                            $Object = new DateTime();
+                                            $Object->setTimezone(new DateTimeZone($event_nasa_tz_c));
+                                            $Time = $Object->format("d-m-Y H:i");
+                                        }
+                                    ?></h2>
 
                                     <div class="eve_tz_sing_wrap">
                                         <div class="eve_tz_sing_wrap__inner">
@@ -126,29 +135,18 @@ while (have_posts()) :
                                     <?php echo get_the_post_thumbnail(get_the_ID(), array(150, 150)); ?>
                                 </div>
                                 <?php } else {
-                                if (has_custom_logo()) :
-                                    // Get Custom Logo image of Header
-                                    $custom_logo_id = get_theme_mod('custom_logo');
-                                    $custom_logo_data = wp_get_attachment_image_src($custom_logo_id, 'full');
-                                    $custom_logo_url = $custom_logo_data[0];
+                                    $custom_logo_url = plugin_dir_url( __DIR__ ) .'img/nasa-logo.svg';
                                 ?>
                                     <div class="feature_img">
                                         <img src="<?php echo esc_url($custom_logo_url); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" />
                                     </div>
-                            <?php endif;
-                            } ?>
+                            <?php } ?>
                         </div>
                         <div class="wrap_single_eve_note_desc">
                             <!-- Below box note -->
                             <div class="note_c">
-                                <?php if ($type_of_event == 'launch' && !empty($event_participate)) {
-                                    esc_html_e('*The timing of launch is not final and subject to weather conditions and many other factors. Those registered will received updates. Please register by clicking the button below.', 'nasa-tca');
-                                } elseif ($type_of_event == 'launch') {
-                                    esc_html_e('*The timing of launch is not final and subject to weather conditions and many other factors.', 'nasa-tca');
-                                } elseif (!empty($event_participate)) {
-                                    esc_html_e('*Those registered will received updates. please register by clicking the button below.', 'nasa-tca');
-                                } else {
-                                    echo "";
+                                <?php if (!empty($event_disclaim)) {
+                                    esc_html_e($event_disclaim);
                                 }
                                 ?>
                             </div>
@@ -182,16 +180,82 @@ while (have_posts()) :
                         </div>
 
                     </div>
+                    <?php
+                    
+                    if (has_post_thumbnail()) {
+                        $dynamic_custom_event_logo_url = get_the_post_thumbnail_url();
+                    }
+                    else {
+                        $dynamic_custom_event_logo_url = plugin_dir_url(__DIR__) . 'img/nasa-logo.svg';
+                    
+                    }
+                    ?>
+                    <div class="nasa_timezon">
+                        <div class="nasa_timezon-header">
+                            <div class="nasa_timezon-header-logo">
+                                <img src="<?php echo esc_url($dynamic_custom_event_logo_url); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" />
+                                <h2> <?php _e(get_the_title()); ?></h2>
+                            </div>
+                            <div class="nasa_timezon-header-button">
+                                <div class="all_event_convert_btn download_img nasa_downlod-bt" img_name="NASA'S <?php _e(get_the_title()); ?>.jpg"><?php esc_html_e('Download Image'); ?></div>
+                                <a class="all_event_convert_btn read_bio_share open-button" popup-open="popup-h-share" href="javascript:void(0)"><?php esc_html_e('Share', 'nasa-tca') ?></a>
+                            </div>
 
+                        </div>
+                        <div class="nasa_timezon-wrapper">
+                            <div class="nasa_timezon-wrapper--row">
+                                <div class="nasa_timezon-wrapper--column">
+                                    <?php
+                                      // Location
+                                      if (!empty($event_location)) {   ?>
+                                      <div class="timezon-header-title">
+                                        <p><?php esc_html_e($event_location, 'nasa-tca'); ?></p>
+                                    </div>
+                                    <?php } ?>
+                                    <ul>
+                                    <?php if (!empty($event_nasa_launch_c)) { ?>
+                                                
+                                                 <li class="lunch-time-bottom">
+                                                    <strong class="launch-time"><?php esc_html_e('LAUNCH DATE AND TIME', 'nasa-tca') ?></strong>
+                                                    <p></p>
+                                                </li>
+                                            <?php } ?>
+                                    <?php
+                                    // Broadcast Date
+                                    if (!empty($event_nasa_broadcast_c)) { ?>
+                                            <li class="borad-time-bottom">
+                                                    <strong class="broadcast-time"><?php esc_html_e('BROADCAST DATE AND TIME', 'nasa-tca') ?></strong>
+                                                    <p> </p>
+                                            </li>
+                                    <?php } ?>
+                                    </ul>
+                                </div>
+
+                                <div class="nasa_timezon-wrapper--column user-time-column hide-block">
+                                    <div class="timezon-header-title">
+                                        <p></p>
+                                    </div>
+                                    <ul>
+                                        <li class="user-lunch-time-bottom hide-block">
+                                            <strong class="launch-time">LAUNCH DATE AND TIME</strong>
+                                            <p></p>
+                                        </li>
+                                        <li class="user-broad-time-bottom hide-block">
+                                            <strong class="broadcast-time">BROADCAST DATE AND TIME</strong>
+                                            <p></p>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
                     <div class="wrap_map_share_popup">
 
                         <div class="wrap_share_popup">
-                            <div class="wrap_both_btn">
-                                <!-- Donwload Image Button -->
-                                <div class="all_event_convert_btn download_img" img_name="NASA'S <?php _e(get_the_title()); ?>.jpg"><?php esc_html_e('Download Image'); ?></div>
-                                <!-- Share Button -->
-                                <a class="all_event_convert_btn read_bio_share open-button" popup-open="popup-h-share" href="javascript:void(0)"><?php esc_html_e('Share', 'nasa-tca') ?></a>
-                            </div>
 
                             <!-- Share popupstart -->
                             <div class="popup" popup-name="popup-h-share" style="display: none;">
@@ -262,112 +326,70 @@ while (have_posts()) :
                             </div>
                             <!-- Share popupend -->
                         </div>
-                        <!-- SVG map include via js -->
-                        <div class="wrap_maping_detail">
-                            <div id="svgMap"></div>
-                        </div>
-                        <!-- On map feature image & title -->
-                        <div class="on_map_wrap">
-                            <div class="single_on_map_wrap">
-                                <?php if (has_post_thumbnail(get_the_ID())) { ?>
-                                    <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'single-post-thumbnail'); ?>
-                                    <div class="eve_img_on_map">
-                                        <img src="<?php echo $image[0]; ?>" alt="" width="50" height="50">
-                                    </div>
-                                    <?php } else {
-                                    if (has_custom_logo()) :
-                                        // Get Custom Logo URL of Header
-                                        $custom_logo_id = get_theme_mod('custom_logo');
-                                        $custom_logo_data = wp_get_attachment_image_src($custom_logo_id, 'full');
-                                        $custom_logo_url = $custom_logo_data[0];
-                                    ?>
-                                        <div class="eve_img_on_map">
-                                            <img src="<?php echo esc_url($custom_logo_url); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" />
-                                        </div>
-                                <?php endif;
-                                } ?>
-                                <?php if (!empty(get_the_title())) { ?>
-                                    <div class="eve_title_on_map"><?php esc_html_e(get_the_title()); ?></div>
-                                <?php } ?>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
 
                 <script>
                     // Display launch & broadcast datatime via timezone with converted timezone
-                    var eve_id = "<?php echo get_the_ID(); ?>",
+                     var eve_id = "<?php echo get_the_ID(); ?>",
                         cookie_set_tz_sej = getCookie("nevent-" + eve_id),
                         cookie_set_all_tz_sej = getCookie("timezoneset_cookie");
-                    if ("" != cookie_set_all_tz_sej) var tz_sej = cookie_set_all_tz_sej;
-                    else if ("" == cookie_set_tz_sej) tz_sej = "<?php echo $event_nasa_tz_c; ?>";
-                    else tz_sej = cookie_set_tz_sej;
-                    var lunch_d_sej = "<?php if (!empty($event_nasa_launch_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "dd LLLL y h:mm a ZZZZ") + "<?php } ?>",
-                        lunch_T_sej = "<?php if (!empty($event_nasa_launch_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "h:mm a ZZZZ") + "<?php } ?>",
-                        lunch_T_full_sej = "<?php if (!empty($event_nasa_launch_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "ZZZZZ") + "<?php } ?>",
-                        broadcast_T_sej = "<?php if (!empty($event_nasa_broadcast_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_broadcast_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "h:mm a ZZZZ") + "<?php } ?>";
-                    broadcast_d_sej = "<?php if (!empty($event_nasa_broadcast_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_broadcast_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "dd LLLL y h:mm a ZZZZ") + "<?php } ?>";
+                        var tz_sejj = "<?php echo $event_nasa_tz_c; ?>"
+                        var lunch_d_sej = "<?php if (!empty($event_nasa_launch_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sejj, "dd LLLL y h:mm a ZZZZ") + "<?php } ?>",
+                        lunch_T_sej = "<?php if (!empty($event_nasa_launch_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sejj, "h:mm a ZZZZ") + "<?php } ?>",
+                        lunch_T_full_sej = "<?php if (!empty($event_nasa_launch_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sejj, "ZZZZZ") + "<?php } ?>",
+                        broadcast_T_sej = "<?php if (!empty($event_nasa_broadcast_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_broadcast_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sejj, "h:mm a ZZZZ") + "<?php } ?>";
+                        broadcast_d_sej = "<?php if (!empty($event_nasa_broadcast_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_broadcast_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sejj, "dd LLLL y h:mm a ZZZZ") + "<?php } ?>"
+                        jQuery(document).ready((function(e) {
+                            e(".lunch-time-bottom p").text("<?php if (!empty($event_nasa_launch_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sejj, "dd LLLL y h:mm a ZZZZ") + "<?php } ?>");
+                            e(".borad-time-bottom p").text("<?php if (!empty($event_nasa_broadcast_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_broadcast_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sejj, "dd LLLL y h:mm a ZZZZ") + "<?php } ?>");
+                        }));
+                    if ("" != cookie_set_all_tz_sej){
+                        tz_sej = cookie_set_all_tz_sej,
+                        cookie_set_all_tz_ab = getCookie("timezoneset_abb"),
+                        cookie_set_all_tz_timezone = getCookie("timezoneset_timezone");
+                        var lunch_d_sej = "<?php if (!empty($event_nasa_launch_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "dd LLLL y h:mm a") + "<?php } ?>",
+                        lunch_T_sej = "<?php if (!empty($event_nasa_launch_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "h:mm a") + "<?php } ?>",
+                        broadcast_T_sej = "<?php if (!empty($event_nasa_broadcast_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_broadcast_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "h:mm a") + "<?php } ?>";
+                        broadcast_d_sej = "<?php if (!empty($event_nasa_broadcast_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_broadcast_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "dd LLLL y h:mm a") + "<?php } ?>"
+                        jQuery(document).ready((function(e) {
+                            e(".launch_D").empty(), e(".launch_D").text(lunch_d_sej+" "+cookie_set_all_tz_ab), e(".broadcast_D").empty(), e(".broadcast_D").text(broadcast_d_sej+" "+cookie_set_all_tz_ab), e(".eve_heading.heading_launch span").empty(), e(".eve_heading.heading_launch span").text(lunch_T_sej+' '+cookie_set_all_tz_ab), e(".eve_heading.heading_broadcast span").empty(), e(".eve_heading.heading_broadcast span").text(broadcast_T_sej+" "+cookie_set_all_tz_ab), e(".single_event_wrap .box_eve_detail .eve_tz_title").empty(), e(".single_event_wrap .box_eve_detail .eve_tz_title").text(cookie_set_all_tz_timezone);
+                            e(".nasa_timezon-wrapper--column.user-time-column").removeClass('hide-block');
+                            e(".nasa_timezon-wrapper--column.user-time-column .user-lunch-time-bottom").removeClass('hide-block');
+                            e(".nasa_timezon-wrapper--column.user-time-column .user-lunch-time-bottom p").text(lunch_d_sej+" "+cookie_set_all_tz_ab);
+                            <?php if (!empty($event_nasa_broadcast_c)) { ?>
+                                e(".nasa_timezon-wrapper--column.user-time-column .user-broad-time-bottom").removeClass('hide-block');
+                            e(".nasa_timezon-wrapper--column.user-time-column .user-broad-time-bottom p").text(broadcast_d_sej+" "+cookie_set_all_tz_ab);
+                            e(".nasa_timezon-wrapper--column.user-time-column .timezon-header-title p").text(cookie_set_all_tz_timezone)
+                            <?php }  ?>
+                        }));
+                    }
+                    else if ("" != cookie_set_tz_sej){
+                        tz_sej = cookie_set_tz_sej;
+                        cookie_set_tz_ab = getCookie("nevent-" + eve_id +"abb"),
+                        cookie_set_tz_timezone = getCookie("nevent-" + eve_id + "timezone");
+                        var lunch_d_sej = "<?php if (!empty($event_nasa_launch_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "dd LLLL y h:mm a") + "<?php } ?>",
+                        lunch_T_sej = "<?php if (!empty($event_nasa_launch_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "h:mm a") + "<?php } ?>",
+                        broadcast_T_sej = "<?php if (!empty($event_nasa_broadcast_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_broadcast_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "h:mm a") + "<?php } ?>";
+                        broadcast_d_sej = "<?php if (!empty($event_nasa_broadcast_c)) { ?>" + DateTimeTzConvert("<?php echo converToTzFormat($event_nasa_broadcast_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>", tz_sej, "dd LLLL y h:mm a") + "<?php } ?>"
+                        jQuery(document).ready((function(e) {
+                            e(".launch_D").empty(), e(".launch_D").text(lunch_d_sej+" "+cookie_set_tz_ab), e(".broadcast_D").empty(), e(".broadcast_D").text(broadcast_d_sej+" "+cookie_set_tz_ab), e(".eve_heading.heading_launch span").empty(), e(".eve_heading.heading_launch span").text(lunch_T_sej+' '+cookie_set_tz_ab), e(".eve_heading.heading_broadcast span").empty(), e(".eve_heading.heading_broadcast span").text(broadcast_T_sej+" "+cookie_set_tz_ab), e(".single_event_wrap .box_eve_detail .eve_tz_title").empty(), e(".single_event_wrap .box_eve_detail .eve_tz_title").text(cookie_set_tz_timezone);
+                            e(".nasa_timezon-wrapper--column.user-time-column").removeClass('hide-block');
+                            e(".nasa_timezon-wrapper--column.user-time-column .user-lunch-time-bottom").removeClass('hide-block');
+                            e(".nasa_timezon-wrapper--column.user-time-column .user-lunch-time-bottom p").text(lunch_d_sej+" "+cookie_set_tz_ab);
+                            e(".nasa_timezon-wrapper--column.user-time-column .timezon-header-title p").text(cookie_set_tz_timezone)
+                            <?php if (!empty($event_nasa_broadcast_c)) { ?>
+                            e(".nasa_timezon-wrapper--column.user-time-column .user-broad-time-bottom").removeClass('hide-block');
+                            e(".nasa_timezon-wrapper--column.user-time-column .user-broad-time-bottom p").text(broadcast_d_sej+" "+cookie_set_tz_ab);
+                            <?php }  ?>
+                        }));
+                    }
+                    else {
                     jQuery(document).ready((function(e) {
                         e(".launch_D").empty(), e(".launch_D").text(lunch_d_sej), e(".broadcast_D").empty(), e(".broadcast_D").text(broadcast_d_sej), e(".eve_heading.heading_launch span").empty(), e(".eve_heading.heading_launch span").text(lunch_T_sej), e(".eve_heading.heading_broadcast span").empty(), e(".eve_heading.heading_broadcast span").text(broadcast_T_sej), e(".single_event_wrap .box_eve_detail .eve_tz_title").empty(), e(".single_event_wrap .box_eve_detail .eve_tz_title").text(lunch_T_full_sej)
                     }));
-                    // SVG map create 
-                    new svgMap({
-                        targetElementID: 'svgMap',
-                        colorNoData: '#033e58',
-                        colorMax: "#CC0033",
-                        hideFlag: true,
-                        mouseWheelZoomEnabled: false,
-                        data: {
-                            data: {
-                                <?php if (!empty($selected_location) || !empty($def_location_svg)) { ?> location: {
-                                        format: '<svg xmlns="http://www.w3.org/2000/svg" width="11" height="14" viewBox="0 0 11 14" fill="none"><path opacity="0.3" d="M5.15626 0C3.78923 0.00161272 2.47865 0.545377 1.51202 1.51201C0.545382 2.47865 0.00161821 3.78922 5.48573e-06 5.15625C-0.00163181 6.27339 0.363278 7.36021 1.03876 8.25C1.03876 8.25 1.17938 8.43516 1.20235 8.46187L5.15626 13.125L9.11204 8.45953C9.13266 8.43469 9.27376 8.25 9.27376 8.25L9.27422 8.24859C9.94937 7.35919 10.3141 6.27287 10.3125 5.15625C10.3109 3.78922 9.76713 2.47865 8.80049 1.51201C7.83386 0.545377 6.52328 0.00161272 5.15626 0ZM5.15626 7.03125C4.78542 7.03125 4.4229 6.92128 4.11456 6.71526C3.80622 6.50923 3.5659 6.21639 3.42398 5.87378C3.28207 5.53117 3.24494 5.15417 3.31728 4.79046C3.38963 4.42674 3.56821 4.09265 3.83043 3.83042C4.09265 3.5682 4.42675 3.38962 4.79046 3.31728C5.15418 3.24493 5.53118 3.28206 5.87379 3.42398C6.2164 3.56589 6.50923 3.80621 6.71526 4.11456C6.92129 4.4229 7.03126 4.78541 7.03126 5.15625C7.03064 5.65334 6.83289 6.12989 6.4814 6.48139C6.1299 6.83289 5.65335 7.03063 5.15626 7.03125Z" fill="black"/></svg> {0} '
-                                    },
-                                <?php }
-                                if (!empty($event_nasa_launch_c)) { ?> launch_d_svg: {
-                                        name: '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none"><path opacity="0.3" d="M6.25 0C2.80375 0 0 2.80375 0 6.25C0 9.69625 2.80375 12.5 6.25 12.5C9.69625 12.5 12.5 9.69625 12.5 6.25C12.5 2.80375 9.69625 0 6.25 0ZM9.84375 6.875H5.625V2.5H6.875V5.625H9.84375V6.875Z" fill="black"/></svg><?php esc_html_e('Launch date & time', 'nasa-tca') ?>',
-                                        format: '{0} '
-                                    },
-                                <?php }
-                                if (!empty($event_nasa_broadcast_c)) { ?> broadcast_d_svg: {
-                                        name: '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none"><path opacity="0.3" d="M10 1.25C10 0.560625 9.43937 0 8.75 0H1.25C0.560625 0 0 0.560625 0 1.25V7.5C0 8.18937 0.560625 8.75 1.25 8.75H8.75C9.43937 8.75 10 8.18937 10 7.5V5.41687L12.5 7.5V1.25L10 3.33313V1.25Z" fill="black"/></svg><?php esc_html_e('Broadcast date & time', 'nasa-tca') ?>',
-                                        format: '{0} '
-                                    }
-                                <?php } ?>
-                            },
-                            applyData: 'launch_d_svg',
-                            values: {
-                                <?php // Default timezone date
-                                if (!empty($event_nasa_tz_c)) { ?>
-                                    <?php echo fetchtimezone_data($event_nasa_tz_c, 'countryCode'); ?>: {
-                                        launch_d_svg: "<?php if (!empty($event_nasa_launch_c)) { ?>" +
-                                            DateTimeTzConvert('<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>', '<?php echo $event_nasa_tz_c; ?>', 'dd LLLL y h:mm a ZZZZ') +
-                                            "<?php } ?>",
-                                        broadcast_d_svg: "<?php if (!empty($event_nasa_broadcast_c)) { ?>" +
-                                            DateTimeTzConvert('<?php echo converToTzFormat($event_nasa_broadcast_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>', '<?php echo $event_nasa_tz_c; ?>', 'dd LLLL y h:mm a ZZZZ') +
-                                            "<?php } ?>",
-                                        location: '<?php if (!empty($def_location_svg)) {
-                                                        _e($def_location_svg);
-                                                    }  ?>'
-                                    },
-                                <?php } ?>
-                                <?php // Converted timezone date
-                                if (isset($eve_cookie_store_state) && !empty($event_nasa_tz_c)) { ?>
-                                    <?php echo fetchtimezone_data($eve_cookie_store_state, 'countryCode'); ?>: {
-                                        launch_d_svg: "<?php if (!empty($event_nasa_launch_c)) { ?>" +
-                                            DateTimeTzConvert('<?php echo converToTzFormat($event_nasa_launch_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>', '<?php echo $eve_cookie_store_state; ?>', 'dd LLLL y h:mm a ZZZZ') +
-                                            "<?php } ?>",
-                                        broadcast_d_svg: "<?php if (!empty($event_nasa_broadcast_c)) { ?>" +
-                                            DateTimeTzConvert('<?php echo converToTzFormat($event_nasa_broadcast_c, $event_nasa_tz_c, $event_nasa_tz_c, DateTime::ATOM); ?>', '<?php echo $eve_cookie_store_state; ?>', 'dd LLLL y h:mm a ZZZZ') +
-                                            "<?php } ?>",
-                                        location: '<?php if (!empty($selected_location)) {
-                                                        _e($selected_location);
-                                                    } ?>'
-                                    }
-                                <?php } ?>
-                            },
-                        }
-                    });
+                }
                 </script>
 
             </article>
@@ -391,12 +413,14 @@ endwhile; // End of the loop.
                     <span class="tz_heading_pu"> <?php esc_html_e('Select your timezone', 'nasa-tca'); ?></span>
                     <div class="sel_timezone_csingle_eve">
                         <div class="wrap_tz_aj">
-                            <input type="text" class="sel_timezone_id" value="" placeholder="Search for your region or city">
-
-                            <div class="timezone_via_key"></div>
+                            <select type="text" class="sel_timezone_id" value="" placeholder="Search for your region or city">
+                                <?php 
+                                require_once plugin_dir_path( __FILE__ ) . '../partials/nasa-time-converter-app-public-display.php';
+                                ?>
+                            </select>
                         </div>
 
-                        <input type="submit" value="<?php esc_attr_e('Confirm', 'nasa-tca'); ?>" class="disable_btn_confirm confirm_btn single_eve_tz_p single_page_eve_tz" disabled="disabled">
+                        <input type="submit" value="<?php esc_attr_e('Confirm', 'nasa-tca'); ?>" class="confirm_btn single_eve_tz_p single_page_eve_tz">
                     </div>
                 </div>
             </div>

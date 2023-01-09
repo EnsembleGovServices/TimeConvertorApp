@@ -72,13 +72,10 @@ class Nasa_Time_Converter_App_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		if (is_single() && get_post_type() == 'event') {
-			wp_enqueue_style('svgMap-css',  plugin_dir_url( __FILE__ ) . 'css/svgMap.min.css', array(), $this->version, 'all' );
-		}
 		if (is_page_template('templates/template-event_listing.php')  ||  is_single() && get_post_type() == 'event') {
 			wp_enqueue_style('all_event_style', plugin_dir_url( __FILE__ ) . 'css/plugin_event_style.css');
 		}
-		//wp_enqueue_style( 'select-2-style', plugin_dir_url( __FILE__ ) . 'css/select2.min.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'select-2-style', plugin_dir_url( __FILE__ ) . 'css/select2.min.css', array(), $this->version, 'all' );
 		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/nasa-time-converter-app-public.css', array(), $this->version, 'all' );
 	}
 
@@ -101,13 +98,13 @@ class Nasa_Time_Converter_App_Public {
 		 * class.
 		 */
 		if (is_single() && get_post_type() == 'event') {
-			wp_enqueue_script('svgMap',  plugin_dir_url( __FILE__ ) . 'js/svgMap.min.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script('html2canvas',  plugin_dir_url( __FILE__ ) . 'js/html2canvas.min.js', array( 'jquery' ), $this->version, false );
 		}
 		if (is_page_template('templates/template-event_listing.php')  ||  is_single() && get_post_type() == 'event') {
 			wp_enqueue_script('plugin_custom', plugin_dir_url( __FILE__ ) . 'js/plugin_custom.js', array( 'jquery' ), $this->version, false);
 			wp_localize_script('plugin_custom','userdata', array( 'theme_uri' => get_stylesheet_directory_uri(), 'ajax_url' => admin_url('admin-ajax.php'), 'site_url' => site_url()));
 		}
+		wp_enqueue_script('select2',  plugin_dir_url( __FILE__ ) . 'js/select2.min.js', array( 'jquery' ), $this->version, false );
 	}
 
 }
@@ -214,29 +211,3 @@ function fetchtimezone_data($data_timezone, $return_data)
 	}
 }
 
-function ksc_searchregion()
-{
-	$term = sanitize_text_field($_REQUEST['term']);
-	$returnResult = array();
-	if (!empty($term)) {
-		global $wpdb;
-		$preparedsql = $wpdb->prepare("SELECT * FROM `cityandzones` WHERE `city` LIKE %s OR `state` LIKE %s order by (city = %s) desc, length(city) LIMIT 5;", '%' . $wpdb->esc_like($term) . '%','%' . $wpdb->esc_like($term) . '%',$wpdb->esc_like($term));
-		$results = $wpdb->get_results($preparedsql);
-		if ($results) {
-			foreach ($results as $singleRow) {
-				$temparray['id'] = $singleRow->timezone;
-				$temparray['text'] =  $singleRow->city . ', ' . $singleRow->state . ', ' . $singleRow->country;
-				$returnResult['results'][] = $temparray;
-			}
-		}
-	}
-	if (!isset($returnResult['results'])) {
-		$returnResult['results'] = '';
-	}
-	$returnResult['pagination'] = array("more" => false);
-	echo json_encode($returnResult);
-	die();
-}
-
-add_action('wp_ajax_nopriv_searchregion', 'ksc_searchregion');
-add_action('wp_ajax_searchregion', 'ksc_searchregion');

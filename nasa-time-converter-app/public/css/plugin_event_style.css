@@ -183,7 +183,7 @@ input.disable_btn_confirm:disabled {
     margin-bottom: 50px
 }
 
-.reset_btn_hide {
+.reset_btn_hide, .hide-block{
     display: none !important
 }
 
@@ -986,6 +986,170 @@ table tr td:first-child {
     font-weight: 500
 }
 
+
+/* new add css */
+
+.popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz .select2-container--default , .popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .select2-container--default {
+  
+    width: 100%!important;;
+    max-width: 446px;
+  }
+  .popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz .select2-container--default .select2-selection--single, .popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .select2-container--default .select2-selection--single{
+  height: 52px;
+  }
+  .popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz .select2-container--default .select2-selection--single .select2-selection__rendered,
+.popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 52px;
+  padding-left: 20px;
+  width: 100%;
+  max-width: 400px;
+  }
+  .popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .wrap_tz_aj .select2-container--default .select2-selection--single .select2-selection__arrow{
+  height: 52px;
+  }
+  .select2-container{z-index: 999999;}
+  .select2-container--open .select2-dropdown{top: -16px!important;}
+  .select2-container--default .select2-search--dropdown .select2-search__field{border: none!important;}
+  .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable{
+    background: #F64137!important;
+   
+  }
+  .select2-container--default .select2-results__option{
+     border-bottom: 1px solid #ccc;
+    padding: 15px 20px !important;
+  }
+  
+  .select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .select2-container--default .select2-results > .select2-results__options {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+  }
+
+
+  /* timezon section css */
+  .nasa_timezon{
+    width: 100%;
+    
+    margin: 20px 0px;
+
+  } 
+  .nasa_timezon .nasa_timezon-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    padding: 20px 30px;
+
+  }
+  .nasa_timezon .nasa_timezon-header .nasa_timezon-header-logo{display: flex;align-items: center;grid-gap: 15px; width: 50%;}
+  .nasa_timezon-header-logo img{max-width: 100px;}
+  .nasa_timezon .nasa_timezon-header .nasa_timezon-header-button{
+    display: flex;
+    grid-gap: 15px;
+    width: 50%;
+
+justify-content: flex-end;
+  }
+  .nasa_timezon-wrapper .nasa_timezon-wrapper--row {
+    border: 1px solid #CACACA;
+    padding: 20px 29px;
+    display: flex;
+    border-top: none;
+    grid-gap: 50px;
+  }
+  .nasa_timezon-wrapper .nasa_timezon-wrapper--row .nasa_timezon-wrapper--column{
+    
+    flex: 1 auto;
+    display: block;
+    list-style: none;
+    margin: 0;
+  }
+  .nasa_timezon-wrapper .nasa_timezon-wrapper--row .nasa_timezon-wrapper--column .timezon-header-title {
+
+    border-bottom: 1px dashed #ccc;
+    padding: 10px 0px;
+    display: inline-block;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 18px;
+    
+
+}
+.nasa_timezon-wrapper .nasa_timezon-wrapper--row .nasa_timezon-wrapper--column .timezon-header-title:before {
+    content: '';
+    position: absolute;
+    background-image: url('../img/location-icon.svg');
+    width: 12px;
+    height: 15px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.nasa_timezon-wrapper .nasa_timezon-wrapper--row .nasa_timezon-wrapper--column .timezon-header-title p{
+margin-bottom: 0px;
+}
+  .nasa_timezon-wrapper .nasa_timezon-wrapper--row .nasa_timezon-wrapper--column p{
+    margin-bottom: 10px;
+  }
+  .nasa_timezon-wrapper .nasa_timezon-wrapper--row .nasa_timezon-wrapper--column ul{
+
+    list-style: none;
+    margin: 0;
+  }
+
+  .nasa_timezon-wrapper .nasa_timezon-wrapper--row .nasa_timezon-wrapper--column ul li{
+  position: relative;
+  padding-left: 18px;
+  }
+  .nasa_timezon-wrapper .nasa_timezon-wrapper--row .nasa_timezon-wrapper--column ul li strong{
+    position: relative;
+    }
+    .nasa_timezon-wrapper .nasa_timezon-wrapper--row .nasa_timezon-wrapper--column ul li strong.launch-time:before{
+        content: '';
+    position: absolute;
+    background-image: url('../img/clock-icon.svg');
+    width: 13px;
+    height: 13px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: -20px;
+    top: 55%;
+    transform: translateY(-50%);
+        }
+        .nasa_timezon-wrapper .nasa_timezon-wrapper--row .nasa_timezon-wrapper--column ul li strong.broadcast-time:before{
+            content: '';
+    position: absolute;
+    background-image: url('../img/brodcast-icon.svg');
+    width: 15px;
+    height: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: -20px;
+    top: 55%;
+    transform: translateY(-50%);
+            }
+
+      
+    .nasa_timezon-header-logo h2{
+        font-family: 'HelveticaNeue-bold';
+
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+color: #FFFFFF;
+
+
+    }        
+
+
+
+
 @media(max-width:1439px) {
     .container {
         max-width: calc(100% - 10%)
@@ -1019,6 +1183,27 @@ table tr td:first-child {
 }
 
 @media(max-width:767px) {
+    .nasa_timezon .nasa_timezon-header .nasa_timezon-header-logo{
+        width: 100%;
+        justify-content: center;
+    }
+    .nasa_timezon .nasa_timezon-header .nasa_timezon-header-button{
+        width: 100%;
+        justify-content: center;
+    }
+    .select2-container--open .select2-dropdown {
+
+        top: -4px !important;
+    
+    }
+    .popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz .select2-container--default .select2-selection--single .select2-selection__rendered, .popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .select2-container--default .select2-selection--single .select2-selection__rendered{
+
+        max-width: 300px;
+        }
+        .popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz .select2-container--default, .popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .select2-container--default{
+    width: 100%;
+    max-width: 100%;
+    }
     .single_event_cookie_store .eve_heading,
 .single_event_cookie_store .eve_heading span {
 
@@ -1078,10 +1263,14 @@ table tr td:first-child {
     .wrap_map_share_popup .wrap_share_popup .wrap_social__inner .social_icon {
         margin-right: 20px
     }
+    .nasa_timezon .nasa_timezon-header{
+        flex-direction: column;
+        grid-gap: 15px;
+    }
 }
 
 @media(max-width:600px) {
-  
+
     .eve_tz_sing_wrap__inner {
         display: block
     }
@@ -1091,6 +1280,20 @@ table tr td:first-child {
 }
 
 @media(max-width:499px) {
+    
+    .nasa_timezon-wrapper .nasa_timezon-wrapper--row {
+        flex-wrap: wrap;
+        grid-gap: 10px;
+    }
+    .nasa_timezon-wrapper .nasa_timezon-wrapper--row .nasa_timezon-wrapper--column:first-child{
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+    .popup-content__wrap .content_wrap .select_ur_timezone .sel_timezone_call_tz .select2-container--default .select2-selection--single .select2-selection__rendered, .popup-content__wrap .single_content_wrap .select_ur_timezone .sel_timezone_csingle_eve .select2-container--default .select2-selection--single .select2-selection__rendered {
+
+        max-width: 268px;
+    
+    }
     .wrap_social__inner {
         grid-gap: 15px
     }

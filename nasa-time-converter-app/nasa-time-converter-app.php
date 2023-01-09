@@ -8,9 +8,9 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Nasa Time Converter App
- * Plugin URI:        https://www.ensembleconsultancy.com
+ * Plugin URI:        https://github.com/EnsembleGovServices/TimeConvertorApp
  * Description:       Plugin provides an option to add events along with the timezone convert option.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Ensemble
  * Author URI:        https://www.ensembleconsultancy.com
  * License:           GPL-2.0+
@@ -26,10 +26,8 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
  */
-define( 'NASA_TIME_CONVERTER_APP_VERSION', '1.0.0' );
+define( 'NASA_TIME_CONVERTER_APP_VERSION', '1.0.1' );
 
 /**
  * The code that runs during plugin activation.

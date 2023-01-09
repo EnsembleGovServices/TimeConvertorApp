@@ -28,12 +28,7 @@ class Nasa_Time_Converter_App_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
-
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-
-		$sql = "DROP TABLE IF EXISTS cityandzones";
-		$wpdb->query($sql);
-
+		flush_rewrite_rules();
 	}
 
 }
