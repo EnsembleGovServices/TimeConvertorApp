@@ -4,7 +4,7 @@
 ## How to install the plugin
 The Plugin can be installed with two methods:
 1. Download the repository and make a zip file of "nasa-time-converter-app" and then upload the zip under the WordPress Dashboard -> Plugins -> Add new plugin.
-2. Clone the repositry and upload "nasa-time-converter-app" directory on the server under wp-content/plugins 
+2. Clone the repository and upload "nasa-time-converter-app" directory on the server under wp-content/plugins 
 
 After installation, the application should appear within the plug in menu.  The plug in can be activated from the same area.
 
