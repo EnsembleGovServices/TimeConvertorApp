@@ -3,7 +3,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://www.ensembleconsultancy.com
+ * @link       https://github.com/EnsembleGovServices/TimeConvertorApp
  * @since      1.0.0
  *
  * @package    Nasa_Time_Converter_App
