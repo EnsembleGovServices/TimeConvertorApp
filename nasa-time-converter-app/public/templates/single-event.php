@@ -253,6 +253,8 @@ while (have_posts()) :
                         </div>
 
                     </div>
+                    <h4 style="margin-top: 50px;">Interactive Timezone Map</h4>
+                    <div id="chartdiv"></div>
                     <div class="wrap_map_share_popup">
 
                         <div class="wrap_share_popup">

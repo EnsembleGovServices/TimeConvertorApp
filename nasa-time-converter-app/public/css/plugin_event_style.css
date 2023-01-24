@@ -1370,3 +1370,7 @@ color: #FFFFFF;
         width: 80%
     }
 }
+#chartdiv {
+    width: 100%;
+    height: 1200px;
+  }

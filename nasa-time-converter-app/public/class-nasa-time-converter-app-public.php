@@ -99,6 +99,11 @@ class Nasa_Time_Converter_App_Public {
 		 */
 		if (is_single() && get_post_type() == 'event') {
 			wp_enqueue_script('html2canvas',  plugin_dir_url( __FILE__ ) . 'js/html2canvas.min.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script('amchart',  plugin_dir_url( __FILE__ ) . 'js/amcharts/index.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script('amchartmap',  plugin_dir_url( __FILE__ ) . 'js/amcharts/map.js', array( 'jquery','amchart' ), $this->version, false );
+			wp_enqueue_script('worldtimelaw',  plugin_dir_url( __FILE__ ) . 'js/amcharts/worldTimeZonesLow.js', array( 'jquery','amchart' ), $this->version, false );
+			wp_enqueue_script('wordltimearealaw',  plugin_dir_url( __FILE__ ) . 'js/amcharts/worldTimeZoneAreasLow.js', array( 'jquery','amchart' ), $this->version, false );
+			wp_enqueue_script('amchartanimation',  plugin_dir_url( __FILE__ ) . 'js/amcharts/Animated.js', array( 'jquery','amchart' ), $this->version, false );
 		}
 		if (is_page_template('templates/template-event_listing.php')  ||  is_single() && get_post_type() == 'event') {
 			wp_enqueue_script('plugin_custom', plugin_dir_url( __FILE__ ) . 'js/plugin_custom.js', array( 'jquery' ), $this->version, false);

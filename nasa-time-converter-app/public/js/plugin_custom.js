@@ -3,7 +3,7 @@ var luxon = function (e) { "use strict"; function r(e, t) { for (var n = 0; n < 
 // Plugin custom js
 
 var DateTime = luxon.DateTime;
-
+var zoneseriesss = '';
 // Create cookie
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
@@ -385,6 +385,37 @@ jQuery(document).ready(function ($) {
             }
             //location.reload();
             $('[popup-close-eve]').click();
+            setTimeout(function () {
+                var getselectedcookies = getCookie('timezoneset_cookie');
+                if(!getselectedcookies){
+                    let p_eve_id_check = $('article').attr('id');
+                    getselectedcookies = getCookie("n"+p_eve_id_check);
+                }
+                var idoffset = '';
+                if( getselectedcookies ){
+                    var ftimeofferset = getselectedcookies.slice(0,4);
+                    var timeofferset = getselectedcookies.slice(4);
+                    if(timeofferset){
+                        var timezonoff = timeofferset.split(":");
+                        if(timezonoff){
+                            var firstpart = ('0' + timezonoff[0]).slice(-2);
+                            if(timezonoff[1]){
+                                var lastpart = ('0' + timezonoff[1]).slice(-2);
+                            } else {
+                                var lastpart = "00";
+                            }
+                            idoffset = ftimeofferset+firstpart+":"+lastpart;
+                        } else {
+                            idoffset = "UTC+00:00";
+                        }
+                    }else{
+                        idoffset = "UTC+00:00";
+                    }
+                }
+                var example = zoneseriesss.getDataItemById(idoffset);
+                var utcpoly = example.get("mapPolygon");
+                utcpoly.hover(true);
+            }, 500);
         } else {
             if (single_event_date != '') {
                 let single_eve_dt_tz_con = DateTimeTzConvert(single_event_date, selector_parent, 'dd LLLL y h:mm a');
@@ -407,6 +438,37 @@ jQuery(document).ready(function ($) {
             }
 
             $(".eve_single_popup_btn_" + event_id).addClass("disable_btn_confirm");
+            setTimeout(function () {
+                var getselectedcookies = getCookie('timezoneset_cookie');
+                if(!getselectedcookies){
+                    let p_eve_id_check = $('article').attr('id');
+                    getselectedcookies = getCookie("n"+p_eve_id_check);
+                }
+                var idoffset = '';
+                if( getselectedcookies ){
+                    var ftimeofferset = getselectedcookies.slice(0,4);
+                    var timeofferset = getselectedcookies.slice(4);
+                    if(timeofferset){
+                        var timezonoff = timeofferset.split(":");
+                        if(timezonoff){
+                            var firstpart = ('0' + timezonoff[0]).slice(-2);
+                            if(timezonoff[1]){
+                                var lastpart = ('0' + timezonoff[1]).slice(-2);
+                            } else {
+                                var lastpart = "00";
+                            }
+                            idoffset = ftimeofferset+firstpart+":"+lastpart;
+                        } else {
+                            idoffset = "UTC+00:00";
+                        }
+                    }else{
+                        idoffset = "UTC+00:00";
+                    }
+                }
+                var example = zoneseriesss.getDataItemById(idoffset);
+                var utcpoly = example.get("mapPolygon");
+                utcpoly.hover(true);
+            }, 500);
             $('[popup-close-eve]').click();
         }
 
@@ -543,6 +605,177 @@ jQuery(document).ready(function ($) {
         $(".single_on_map_wrap").css("bottom", "unset");
         $(".single_on_map_wrap .eve_title_on_map").css("color", "#000000");
     }
+
+    function renderInteractiveMap() {
+
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("chartdiv");
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
+        
+        // Create the map chart
+        // https://www.amcharts.com/docs/v5/charts/map-chart/
+        var chart = root.container.children.push(
+          am5map.MapChart.new(root, {
+            panX: "translateX",
+            panY: "translateY",
+            projection: am5map.geoMercator()
+          })
+        );
+        
+        var colorSet = am5.ColorSet.new(root, {});
+        
+        // Create main polygon series for time zone areas
+        // https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/
+        var areaSeries = chart.series.push(
+          am5map.MapPolygonSeries.new(root, {
+            geoJSON: am5geodata_worldTimeZoneAreasLow
+          })
+        );
+        
+        var areaPolygonTemplate = areaSeries.mapPolygons.template;
+        areaPolygonTemplate.setAll({ fillOpacity: 0.6 });
+        areaPolygonTemplate.adapters.add("fill", function (fill, target) {
+          return am5.Color.saturate(
+            colorSet.getIndex(areaSeries.mapPolygons.indexOf(target)),
+            0.5
+          );
+        });
+        
+        areaPolygonTemplate.states.create("hover", { fillOpacity: 0.8 });
+        
+        // Create main polygon series for time zones
+        // https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/
+        var zoneSeries = chart.series.push(
+          am5map.MapPolygonSeries.new(root, {
+            geoJSON: am5geodata_worldTimeZonesLow
+          })
+        );
+        
+        zoneSeries.mapPolygons.template.setAll({
+          fill: am5.color(0x000000),
+          fillOpacity: 0.08
+        });
+        
+        var zonePolygonTemplate = zoneSeries.mapPolygons.template;
+        let c_p_single_event_date = $('.single_event_wrap .wrap_eve_details .btns-eve-wrap .covert_timezone_btn').attr('eve-date');
+        let c_pb_single_event_date = $('.single_event_wrap .wrap_eve_details .btns-eve-wrap .covert_timezone_btn').attr('eve-broad-date');
+        let timezonename = $('.single_event_wrap .wrap_eve_details .btns-eve-wrap .covert_timezone_btn').attr('eve-timezone');
+        if( c_p_single_event_date && c_pb_single_event_date){
+            zonePolygonTemplate.setAll({ interactive: true, tooltipText: "{eventTitle}\n\nLaunch Date and Time: {customData} \nBroadcast Date and Time: {customBroadData}"});
+        } else if (c_p_single_event_date){
+            zonePolygonTemplate.setAll({ interactive: true, tooltipText: "{eventTitle}\n\nLaunch Date and Time: {customData}"});
+        } else if (c_pb_single_event_date){
+            zonePolygonTemplate.setAll({ interactive: true, tooltipText: "{eventTitle}\n\nBroadcast Date and Time: {customBroadData} "});
+        }
+        zonePolygonTemplate.states.create("hover", { fillOpacity: 0.3 });
+        // labels
+        var labelSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
+        labelSeries.bullets.push(() => {
+          return am5.Bullet.new(root, {
+            sprite: am5.Label.new(root, {
+              text: "{id}",
+              populateText: true,
+              centerX: am5.p50,
+              centerY: am5.p50,
+              fontSize: "0.7em"
+            })
+          });
+        });
+        
+        // create labels for each zone  
+        zoneSeries.events.on("datavalidated", () => {
+            var eve_title = $('.covert_timezone_btn').attr('eve-title');
+          am5.array.each(zoneSeries.dataItems, (dataItem) => {
+            var centroid = dataItem.get("mapPolygon").visualCentroid();
+            var UTCT = dataItem.get("id");
+            dataItem.set("eventTitle",eve_title);
+            if( c_p_single_event_date && c_pb_single_event_date){
+                var datetimeofeven = DateTime.fromISO(c_p_single_event_date, { zone: timezonename });
+                var launchDate = datetimeofeven.setZone(UTCT).toFormat('dd LLLL y h:mm a');
+                var datetimebroad = DateTime.fromISO(c_pb_single_event_date, { zone: timezonename });
+                var broadDate = datetimebroad.setZone(UTCT).toFormat('dd LLLL y h:mm a');
+                dataItem.set("customBroadData",broadDate)
+                dataItem.set("customData",launchDate)
+            } else if (c_p_single_event_date){
+                var datetimeofeven = DateTime.fromISO(c_p_single_event_date, { zone: timezonename });
+                var bogus = datetimeofeven.setZone(UTCT).toFormat('dd LLLL y h:mm a');
+                dataItem.set("customData",bogus)
+            } else if (c_pb_single_event_date){
+                var datetimeofeven = DateTime.fromISO(c_pb_single_event_date, { zone: timezonename });
+                var bogus = datetimeofeven.setZone(UTCT).toFormat('dd LLLL y h:mm a');
+                dataItem.set("customBroadData",bogus)
+            }
+            labelSeries.pushDataItem({
+              id: dataItem.get("id"),
+              geometry: {
+                type: "Point",
+                coordinates: [centroid.longitude, centroid.latitude]
+              }
+            });
+          });
+        });
+        // Add zoom control
+        // https://www.amcharts.com/docs/v5/charts/map-chart/map-pan-zoom/#Zoom_control
+        chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
+        
+        // Add labels and controls
+        var cont = chart.children.push(
+          am5.Container.new(root, {
+            layout: root.horizontalLayout,
+            x: 20,
+            y: 40
+          })
+        );
+        
+      
+        // Make stuff animate on load
+        chart.appear(1000, 100);
+        setTimeout(function () {
+            var getselectedcookies = getCookie('timezoneset_cookie');
+            if(!getselectedcookies){
+                let p_eve_id_check = $('article').attr('id');
+                getselectedcookies = getCookie("n"+p_eve_id_check);
+            }
+            var idoffset = '';
+            if( getselectedcookies ){
+                var ftimeofferset = getselectedcookies.slice(0,4);
+                var timeofferset = getselectedcookies.slice(4);
+                if(timeofferset){
+                    var timezonoff = timeofferset.split(":");
+                    if(timezonoff){
+                        var firstpart = ('0' + timezonoff[0]).slice(-2);
+                        if(timezonoff[1]){
+                            var lastpart = ('0' + timezonoff[1]).slice(-2);
+                        } else {
+                            var lastpart = "00";
+                        }
+                        idoffset = ftimeofferset+firstpart+":"+lastpart;
+                    } else {
+                        idoffset = "UTC+00:00";
+                    }
+                }else{
+                    idoffset = "UTC+00:00";
+                }
+            }
+            var example = zoneSeries.getDataItemById(idoffset);
+            // if(example){
+            //     var allElement = zoneSeries.allChildren();
+            //     allElement.forEach(element => {
+            //         if(element.uid !== example.uid){
+            //             element.hideTooltip();
+            //         }
+            //     });
+            // }
+            var utcpoly = example.get("mapPolygon");
+            utcpoly.hover(true);
+        }, 500);
+        zoneseriesss = zoneSeries;
+        };
+    renderInteractiveMap();
 });
 
 function IsEmail(email) {
