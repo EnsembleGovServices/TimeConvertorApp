@@ -197,7 +197,6 @@ while (have_posts()) :
                                 <h2> <?php _e(get_the_title()); ?></h2>
                             </div>
                             <div class="nasa_timezon-header-button">
-                                <div class="all_event_convert_btn download_img nasa_downlod-bt" img_name="NASA'S <?php _e(get_the_title()); ?>.jpg"><?php esc_html_e('Download Image'); ?></div>
                                 <a class="all_event_convert_btn read_bio_share open-button" popup-open="popup-h-share" href="javascript:void(0)"><?php esc_html_e('Share', 'nasa-tca') ?></a>
                             </div>
 
@@ -272,10 +271,10 @@ while (have_posts()) :
                                                 <div class="wrap_share_title"><?php esc_html_e('Message', 'nasa-tca') ?></div>
                                                 <?php
                                                 if (!empty(get_the_title()) && !empty($event_participate)) {
-                                                    $meassage_def = 'I am excited to virtually join The ' . get_the_title()  . ' event. Join me by registering here: ' . $event_participate;
+                                                    $meassage_def = 'I am excited to virtually join the ' . get_the_title()  . ' event. Become a NASA virtual guest yourself at https://nasa.gov/virtualguest. Or ' . $event_participate;
                                                 } else {
                                                     if (!empty(get_the_title())) {
-                                                        $meassage_def = 'I am excited to virtually join The ' . get_the_title()  . ' event.';
+                                                        $meassage_def = 'I am excited to virtually join the ' . get_the_title()  . ' event. Become a NASA virtual guest yourself at https://nasa.gov/virtualguest.';
                                                     }
                                                     if (!empty($event_participate)) {
                                                         $meassage_def = 'I am excited to virtually join event. Join me by registering here: ' . $event_participate;
@@ -412,7 +411,7 @@ endwhile; // End of the loop.
         <div class="popup-content__wrap">
             <div class="single_content_wrap">
                 <div class="select_ur_timezone">
-                    <span class="tz_heading_pu"> <?php esc_html_e('Select your timezone', 'nasa-tca'); ?></span>
+                    <span class="tz_heading_pu"> <?php esc_html_e('Select your timezone. Type after drop-down.', 'nasa-tca'); ?></span>
                     <div class="sel_timezone_csingle_eve">
                         <div class="wrap_tz_aj">
                             <select type="text" class="sel_timezone_id" value="" placeholder="Search for your region or city">

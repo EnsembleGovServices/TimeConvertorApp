@@ -2,7 +2,7 @@
 
 /**
  *
- * @link              https://www.ensembleconsultancy.com
+ * @link              https://github.com/EnsembleGovServices/TimeConvertorApp
  * @since             1.0.0
  * @package           Nasa_Time_Converter_App
  *
@@ -10,7 +10,7 @@
  * Plugin Name:       Nasa Time Converter App
  * Plugin URI:        https://github.com/EnsembleGovServices/TimeConvertorApp
  * Description:       Plugin provides an option to add events along with the timezone convert option.
- * Version:           1.0.2
+ * Version:           1.0.3
  * Author:            Ensemble
  * Author URI:        https://www.ensembleconsultancy.com
  * License:           GPL-2.0+

@@ -55,23 +55,7 @@ jQuery(document).ready(function ($) {
     $('.sel_alltimezone_id').select2();
     $(document).on('select2:open', () => {
         document.querySelector('.select2-search__field').focus();
-    });    
-    // download image
-    jQuery('.download_img').click(function () {
-        let img_name = $(this).attr("img_name");
-        $(".single_event_wrap .tip-icon-success,.single_event_wrap .note_c, .single_event_wrap .btns-eve-wrap .regi_eve_b,.single_event_wrap .btns-eve-wrap .reset_eve_b, .single_event_wrap .btns-eve-wrap .convo_eve_b , .single_event_wrap .wrap_both_btn , .single_event_wrap .view_all_events__wrap").css("display", "none");
-        html2canvas($(".single_event_wrap")[0]).then(function (canvas) {
-            a = document.createElement("a");
-            a.href = canvas
-                .toDataURL("image/jpeg", 0.92)
-                .replace("image/jpeg", "image/octet-stream");
-            a.download = img_name;
-            a.click();
-        });
-
-        $(".single_event_wrap .tip-icon-success,.single_event_wrap .note_c, .single_event_wrap .btns-eve-wrap .regi_eve_b,.single_event_wrap .btns-eve-wrap .reset_eve_b, .single_event_wrap .btns-eve-wrap .convo_eve_b , .single_event_wrap .wrap_both_btn , .single_event_wrap .view_all_events__wrap").css("display", "inline-block");
     });
-
     // Cookie timezone via date display
     let AllCookie = document.cookie.split(";").reduce((ac, cv, i) => Object.assign(ac, { [cv.split('=')[0]]: cv.split('=')[1] }), {});
     $.each(AllCookie, function (key, value) {

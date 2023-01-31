@@ -98,7 +98,6 @@ class Nasa_Time_Converter_App_Public {
 		 * class.
 		 */
 		if (is_single() && get_post_type() == 'event') {
-			wp_enqueue_script('html2canvas',  plugin_dir_url( __FILE__ ) . 'js/html2canvas.min.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script('amchart',  plugin_dir_url( __FILE__ ) . 'js/amcharts/index.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script('amchartmap',  plugin_dir_url( __FILE__ ) . 'js/amcharts/map.js', array( 'jquery','amchart' ), $this->version, false );
 			wp_enqueue_script('worldtimelaw',  plugin_dir_url( __FILE__ ) . 'js/amcharts/worldTimeZonesLow.js', array( 'jquery','amchart' ), $this->version, false );

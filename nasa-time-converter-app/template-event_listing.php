@@ -38,7 +38,7 @@ get_header();
                                     </div>
 
                                     <div class="select_ur_timezone">
-                                        <span class="tz_heading_pu"> <?php esc_html_e('Select your timezone', 'nasa-tca'); ?></span>
+                                        <span class="tz_heading_pu"> <?php esc_html_e('Select your timezone. Type after drop-down.', 'nasa-tca'); ?></span>
 
                                         <div class="sel_timezone_call_tz">
                                             <div class="wrap_tz_aj">
@@ -241,7 +241,7 @@ get_header();
                     <div class="single_content_wrap">
 
                         <div class="select_ur_timezone">
-                            <span class="tz_heading_pu"> <?php esc_html_e('Select your timezone', 'nasa-tca'); ?></span>
+                            <span class="tz_heading_pu"> <?php esc_html_e('Select your timezone. Type after drop-down.', 'nasa-tca'); ?></span>
                             <div class="sel_timezone_csingle_eve">
                                 <div class="wrap_tz_aj">
                                    <select type="text" class="sel_timezone_id" value="" placeholder="Search for your region or city">
