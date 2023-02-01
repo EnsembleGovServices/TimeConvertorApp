@@ -67,7 +67,7 @@
 <option data-abbri="CST" data-timezone="Central Standard Time" value="UTC-6">Central Standard Time(CST), UTC-6</option>
 <option data-abbri="CST" data-timezone="Cuba Standard Time" value="UTC-5">Cuba Standard Time(CST), UTC-5</option>
 <option data-abbri="CST" data-timezone="China Standard Time" value="UTC+8">China Standard Time(CST), UTC+8</option>
-<option data-abbri="CT" data-timezone="Central Time" value="UTC-6/">Central Time(CT), UTC-6</option>
+<option data-abbri="CT" data-timezone="Central Time" value="UTC-6">Central Time(CT), UTC-6</option>
 <option data-abbri="CVT" data-timezone="Cape Verde Time" value="UTC-1">Cape Verde Time(CVT), UTC-1</option>
 <option data-abbri="CWST" data-timezone="Central Western Standard Time" value="UTC+8:45">Central Western Standard Time(CWST), UTC+8:45</option>
 <option data-abbri="CXT" data-timezone="Christmas Island Time" value="UTC+7">Christmas Island Time(CXT), UTC+7</option>

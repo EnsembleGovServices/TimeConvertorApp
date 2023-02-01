@@ -676,6 +676,9 @@ jQuery(document).ready(function ($) {
           am5.array.each(zoneSeries.dataItems, (dataItem) => {
             var centroid = dataItem.get("mapPolygon").visualCentroid();
             var UTCT = dataItem.get("id");
+            if(UTCT == 'AQ'){
+                UTCT = 'UTC+12:00';
+            }
             dataItem.set("eventTitle",eve_title);
             if( c_p_single_event_date && c_pb_single_event_date){
                 var datetimeofeven = DateTime.fromISO(c_p_single_event_date, { zone: timezonename });
