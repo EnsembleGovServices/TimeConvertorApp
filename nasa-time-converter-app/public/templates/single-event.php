@@ -411,7 +411,7 @@ endwhile; // End of the loop.
         <div class="popup-content__wrap">
             <div class="single_content_wrap">
                 <div class="select_ur_timezone">
-                    <span class="tz_heading_pu"> <?php esc_html_e('Select your timezone. Type after drop-down.', 'nasa-tca'); ?></span>
+                    <span class="tz_heading_pu"> <?php esc_html_e('Select your timezone. Type in the search box or scroll through the timezone list.', 'nasa-tca'); ?></span>
                     <div class="sel_timezone_csingle_eve">
                         <div class="wrap_tz_aj">
                             <select type="text" class="sel_timezone_id" value="" placeholder="Search for your region or city">
