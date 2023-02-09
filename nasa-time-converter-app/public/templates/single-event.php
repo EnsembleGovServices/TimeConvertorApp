@@ -77,7 +77,7 @@ while (have_posts()) :
                     <!-- Heading launch time fetch with defualt/converted TimeZone -->
                     <h1 class="eve_heading heading_launch">
                         <?php if (!empty($event_nasa_launch_c)) {
-                            esc_html_e('NASA’s ' . get_the_title() . ' launch will be at ', 'nasa-tca');
+                            esc_html_e(get_the_title() . ' will be at ', 'nasa-tca');
                         } ?>
                         <span></span>
                     </h1>

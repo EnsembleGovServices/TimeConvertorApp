@@ -26,7 +26,7 @@ To create events listing page where all the events get listed please go to Pages
 == Time Conversion ==
 Time conversion is handled on the frontend via JavaScript, If the user selects a specific timezone via search then the plugin store the related cookies and converts the time using JavaScript. There is a reset option that removes the cookies and that shows the default time.
 
-
+== City/Region Search ==
 
 == Screenshots ==
 1. https://nasatime.pages.dev/event-listing.png
